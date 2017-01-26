@@ -6,7 +6,7 @@ onready var player = get_parent()
 onready var player_sprites = player.get_node("sprites")
 onready var interaction_area = player.get_node("interaction_area")
 
-const WALK_SPEED = 150
+const WALK_SPEED = 200
 const JUMP_SPEED = 400
 const RUN_SPEED = 500
 
@@ -30,18 +30,31 @@ func _fixed_process(delta):
 		player.translate(Vector2(0,-5))
 		velocity.y = 0
 		
+	if Input.is_action_pressed("move_right"):
+		direction.x += 1
+	if Input.is_action_pressed("move_left"):
+		direction.x -= 1
+
 	if player.test_motion(Vector2(0,1)):
-		if Input.is_action_pressed("move_right"):
-			direction.x += 1
-		if Input.is_action_pressed("move_left"):
-			direction.x -= 1
-		if Input.is_action_pressed("jump"):
-			direction.y -= 1
 		if Input.is_action_pressed("run"):
 			velocity.x = direction.x * RUN_SPEED
 		else:
 			velocity.x = direction.x * WALK_SPEED
+			
+		if Input.is_action_pressed("jump"):
+			direction.y = -1
 		velocity.y = direction.y * JUMP_SPEED
+	else:
+		if Input.is_action_pressed("run"):
+			velocity.x += direction.x * RUN_SPEED / 2
+		else:
+			velocity.x += direction.x * WALK_SPEED / 2
+			
+	
+	if Input.is_action_pressed("run"):
+		velocity.x = clamp(velocity.x, -RUN_SPEED, RUN_SPEED)
+	else:
+		velocity.x = clamp(velocity.x, -WALK_SPEED, WALK_SPEED)
 		
 	player.set_linear_velocity(velocity)
 	
