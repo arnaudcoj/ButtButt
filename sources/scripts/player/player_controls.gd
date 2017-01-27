@@ -6,15 +6,19 @@ onready var player_sprites = get_node("sprites")
 onready var interaction_area = get_node("interaction_area")
 
 const WALK_SPEED = 200
-const JUMP_SPEED = 400
+const JUMP_SPEED = 300
 const RUN_SPEED = 500
 const CLIMB_SPEED = 100
 const GROUND_FRICTION_MULTIPLIER = 0.7
 const GROUND_ACCELERATION_MULTIPLIER = 0.2
 const AIR_FRICTION_MULTIPLIER = 0.95
 const AIR_DIRECTION_MULTIPLIER = 0.15
+const JUMP_TIME_MAX = 0.2
+const FALLING_JUMP_DELAY = 3
 
 var jumping = false
+var jump_time = 0
+var falling_time = 0
 
 const IDLE = 0
 const WALKING = 1
@@ -198,15 +202,24 @@ func _process(delta):
 			print("climb -> idle")
 			
 	elif fsm == FALLING:
+		falling_time += delta
 		if can_climb && ((Input.is_action_pressed("move_up") && !test_motion(Vector2(0,-5))) || (Input.is_action_pressed("move_down") && !test_motion(Vector2(0,5)))):
 			#check if can climb and if thera are obstacles where we want to climb
 			fsm = CLIMBING
+			falling_time = 0
 			print("fall -> climb")
 		elif test_motion(Vector2(0,5)):
 			fsm = IDLE
+			falling_time = 0
 			print("fall -> idle")
+		elif Input.is_action_pressed("jump") && falling_time < FALLING_JUMP_DELAY:
+			fsm = JUMPING
+			print("fall -> jump")
 			
 	elif fsm == JUMPING:
-		if !Input.is_action_pressed("jump"):
+		jump_time += delta
+		if !Input.is_action_pressed("jump") || jump_time > JUMP_TIME_MAX:
 			fsm = FALLING
+			jump_time = 0
+			falling_time = FALLING_JUMP_DELAY
 			print("jump -> fall")
