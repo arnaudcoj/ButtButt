@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
-[ext_resource path="res://sources/assets/sprites/Tiles/castleHalf.png" type="Texture" id=1]
-[ext_resource path="res://sources/assets/sprites/Tiles/castleHillRight.png" type="Texture" id=2]
-[ext_resource path="res://sources/scenes/player/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sources/scenes/levels/climb_area.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sources/assets/sprites/Tiles/castleHalf.png" type="Texture" id=2]
+[ext_resource path="res://sources/assets/sprites/Tiles/castleHillRight.png" type="Texture" id=3]
+[ext_resource path="res://sources/scenes/player/player.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -28,6 +29,27 @@ points = Vector2Array( 266.432, -29.1708, 337.432, 40.8292, 266.432, 40.8292 )
 
 transform/pos = Vector2( 133, 217 )
 
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="climb_area" parent="Node2D" instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 481, -51.5 )
+transform/scale = Vector2( 1, 2.54688 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Node2D"]
+
+polygon = Vector2Array( 447, -140, 516, -140, 516, 35, 446, 35 )
+uv = Vector2Array(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 input/pickable = false
@@ -45,7 +67,7 @@ bounce = 0.0
 
 transform/pos = Vector2( -0.238586, 0 )
 transform/scale = Vector2( 7.6862, 1 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 
@@ -72,7 +94,7 @@ bounce = 0.0
 
 transform/pos = Vector2( -76, 0 )
 transform/scale = Vector2( 4.6, 1 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D1"]
 
@@ -99,7 +121,7 @@ bounce = 0.0
 
 transform/pos = Vector2( -76, 0 )
 transform/scale = Vector2( 4.6, 1 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 
@@ -133,9 +155,9 @@ trigger = false
 [node name="Sprite" type="Sprite" parent="StaticBody2D 2"]
 
 transform/pos = Vector2( 302.023, 6.13867 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
-[node name="player" parent="." instance=ExtResource( 3 )]
+[node name="player" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 377.432, -17.171 )
 
