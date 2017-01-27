@@ -2,20 +2,19 @@ extends Node
 
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
 
-onready var player_sprites = get_node("sprites")
-onready var interaction_area = get_node("interaction_area")
+onready var player = get_parent()
+onready var player_sprites = player.get_node("sprites")
+onready var interaction_area = player.get_node("interaction_area")
 
-const WALK_SPEED = 200
+const WALK_SPEED = 150
 const JUMP_SPEED = 400
 const RUN_SPEED = 500
-const AIR_FRICTION_MULTIPLIER = 0.95
-const AIR_DIRECTION_MULTIPLIER = 0.15
 
 func _ready():
 	set_fixed_process(true)
 	
 func _fixed_process(delta):
-	var velocity = get_linear_velocity()
+	var velocity = player.get_linear_velocity()
 	var direction = Vector2(0,0)
 	var can_climb = false
 	
@@ -28,38 +27,23 @@ func _fixed_process(delta):
 		can_climb = area extends climb_area
 
 	if can_climb && Input.is_action_pressed("move_up"):
-		translate(Vector2(0,-5))
+		player.translate(Vector2(0,-5))
 		velocity.y = 0
 		
-	if Input.is_action_pressed("move_right"):
-		direction.x += 1
-	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
-
-	if test_motion(Vector2(0,1)):
+	if player.test_motion(Vector2(0,1)):
+		if Input.is_action_pressed("move_right"):
+			direction.x += 1
+		if Input.is_action_pressed("move_left"):
+			direction.x -= 1
+		if Input.is_action_pressed("jump"):
+			direction.y -= 1
 		if Input.is_action_pressed("run"):
 			velocity.x = direction.x * RUN_SPEED
 		else:
 			velocity.x = direction.x * WALK_SPEED
-			
-		if Input.is_action_pressed("jump"):
-			direction.y = -1
 		velocity.y = direction.y * JUMP_SPEED
-	else:
-		if direction.x == 0:
-			velocity.x *= AIR_FRICTION_MULTIPLIER
-		elif Input.is_action_pressed("run"):
-			velocity.x += direction.x * RUN_SPEED * AIR_DIRECTION_MULTIPLIER
-		else:
-			velocity.x += direction.x * WALK_SPEED * AIR_DIRECTION_MULTIPLIER
-			
-	
-	if Input.is_action_pressed("run"):
-		velocity.x = clamp(velocity.x, -RUN_SPEED, RUN_SPEED)
-	else:
-		velocity.x = clamp(velocity.x, -WALK_SPEED, WALK_SPEED)
 		
-	set_linear_velocity(velocity)
+	player.set_linear_velocity(velocity)
 	
 	if velocity.y != 0:
 		player_sprites.play("jump")
