@@ -10,7 +10,9 @@ func _ready():
 
 
 func _on_player_controls_changed(player):
-	sprite_c1.play(player.control_1)
-	particles_c1.set_emitting(true)
-	sprite_c2.play(player.control_2)
-	particles_c2.set_emitting(true)
+	if sprite_c1.get_animation() != player.control_1:
+		sprite_c1.play(player.control_1)
+		particles_c1.set_emitting(true)
+	if sprite_c2.get_animation() != player.control_2:
+		sprite_c2.play(player.control_2)
+		particles_c2.set_emitting(true)

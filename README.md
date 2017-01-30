@@ -1,1 +1,1 @@
-![latest preview](previews/control_changer_short.gif)
+![latest preview](previews/controls_hud_only_changed.gif)
