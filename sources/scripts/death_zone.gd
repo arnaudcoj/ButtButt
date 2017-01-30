@@ -7,7 +7,6 @@ extends Area2D
 
 func _ready():
 	connect("area_enter", self, "on_area_enter")
-	pass
 
 func on_area_enter(area):
 	if area.get_parent().has_node("behaviour"):

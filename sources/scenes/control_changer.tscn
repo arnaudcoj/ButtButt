@@ -1,0 +1,126 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://sources/scripts/control_changer.gd" type="Script" id=1]
+[ext_resource path="res://sources/assets/sprites/HUD/hud_gem_blue.png" type="Texture" id=2]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight43.png" type="Texture" id=3]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight24.png" type="Texture" id=4]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight25.png" type="Texture" id=5]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight23.png" type="Texture" id=6]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight39.png" type="Texture" id=7]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight22.png" type="Texture" id=8]
+[ext_resource path="res://sources/assets/sprites/Items/gemBlue.png" type="Texture" id=9]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 25.7161
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ { "frames":[ ExtResource( 3 ) ], "loop":false, "name":"jump", "speed":1.0 }, { "frames":[ ExtResource( 4 ) ], "loop":false, "name":"move_up", "speed":1.0 }, { "frames":[ ExtResource( 5 ) ], "loop":false, "name":"move_down", "speed":1.0 }, { "frames":[ ExtResource( 6 ) ], "loop":false, "name":"move_right", "speed":1.0 }, { "frames":[ ExtResource( 7 ) ], "loop":false, "name":"run", "speed":1.0 }, { "frames":[ ExtResource( 8 ) ], "loop":false, "name":"move_left", "speed":1.0 } ]
+
+[node name="control_changer" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+__meta__ = { "_edit_group_":true }
+control_1 = "move_right"
+control_2 = "move_left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 2 )
+
+[node name="control_1" type="Label" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -8.0
+margin/top = -19.0
+margin/right = 32.0
+margin/bottom = -5.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "C1"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="control_2" type="Label" parent="."]
+
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -8.0
+margin/top = -2.0
+margin/right = 32.0
+margin/bottom = 12.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "C2"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="control_1_sprite" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 0, -31.1128 )
+transform/scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+animation = "run"
+
+[node name="control_2_sprite" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( 0, 13.8675 )
+transform/scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+animation = "run"
+
+[node name="particles" type="Particles2D" parent="."]
+
+config/amount = 30
+config/lifetime = 2.0
+config/time_scale = 2.76
+config/preprocess = 0.1
+config/emit_timeout = 0.5
+config/emitting = false
+config/explosiveness = 0.03
+config/texture = ExtResource( 9 )
+params/direction = 180.0
+params/spread = 70.99
+params/linear_velocity = 70.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 150.0
+params/radial_accel = 19.67
+params/tangential_accel = 7.23
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.6
+params/final_size = 0.1
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/direction = 1.0
+randomness/spread = 1.0
+randomness/linear_velocity = 1.0
+
+

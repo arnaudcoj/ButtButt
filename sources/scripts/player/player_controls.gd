@@ -1,5 +1,7 @@
 extends Node
 
+var debug = false
+
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
 
 onready var player_sprites = get_node("sprites")
@@ -14,7 +16,7 @@ const GROUND_ACCELERATION_MULTIPLIER = 0.2
 const AIR_FRICTION_MULTIPLIER = 0.95
 const AIR_DIRECTION_MULTIPLIER = 0.15
 const JUMP_TIME_MAX = 0.2
-const FALLING_JUMP_DELAY = 3
+const FALLING_JUMP_DELAY = 0.2
 
 var jumping = false
 var jump_time = 0
@@ -27,6 +29,16 @@ const JUMPING = 3
 const FALLING = 4
 const CLIMBING = 5
 var fsm = IDLE
+
+const CONTROL_UP = "move_up"
+const CONTROL_DOWN = "move_down"
+const CONTROL_LEFT = "move_left"
+const CONTROL_RIGHT = "move_right"
+const CONTROL_RUN = "run"
+const CONTROL_JUMP = "jump"
+
+export var control_1 = CONTROL_RIGHT
+export var control_2 = CONTROL_DOWN
 
 func _ready():
 	set_process(true)
@@ -56,16 +68,16 @@ func integrate_walking(state):
 	var velocity = state.get_linear_velocity()
 	
 	if abs(velocity.x) > WALK_SPEED:
-		if Input.is_action_pressed("move_left"):
+		if is_action_pressed_and_available(CONTROL_LEFT):
 			player_sprites.set_flip_h(true)
-		elif Input.is_action_pressed("move_right"):
+		elif is_action_pressed_and_available(CONTROL_RIGHT):
 			player_sprites.set_flip_h(false)
 		velocity.x = clamp(velocity.x * (1 - GROUND_ACCELERATION_MULTIPLIER), -RUN_SPEED, RUN_SPEED)
 	else:
-		if Input.is_action_pressed("move_left"):
+		if is_action_pressed_and_available(CONTROL_LEFT):
 			velocity.x -= WALK_SPEED * GROUND_ACCELERATION_MULTIPLIER
 			player_sprites.set_flip_h(true)
-		elif Input.is_action_pressed("move_right"):
+		elif is_action_pressed_and_available(CONTROL_RIGHT):
 			velocity.x += WALK_SPEED * GROUND_ACCELERATION_MULTIPLIER
 			player_sprites.set_flip_h(false)
 
@@ -77,10 +89,10 @@ func integrate_running(state):
 	player_sprites.play("walk")
 	var velocity = state.get_linear_velocity()
 	
-	if Input.is_action_pressed("move_left"):
+	if is_action_pressed_and_available(CONTROL_LEFT):
 		velocity.x -= RUN_SPEED * GROUND_ACCELERATION_MULTIPLIER
 		player_sprites.set_flip_h(true)
-	elif Input.is_action_pressed("move_right"):
+	elif is_action_pressed_and_available(CONTROL_RIGHT):
 		velocity.x += RUN_SPEED * GROUND_ACCELERATION_MULTIPLIER
 		player_sprites.set_flip_h(false)
 		
@@ -92,13 +104,13 @@ func integrate_falling(state):
 	player_sprites.play("jump")
 	var velocity = state.get_linear_velocity()
 	
-	if velocity.x > -WALK_SPEED && Input.is_action_pressed("move_left"):
+	if velocity.x > -WALK_SPEED && is_action_pressed_and_available(CONTROL_LEFT):
 		player_sprites.set_flip_h(true)
 		velocity.x -= WALK_SPEED * AIR_DIRECTION_MULTIPLIER
-	elif velocity.x < WALK_SPEED && Input.is_action_pressed("move_right"):
+	elif velocity.x < WALK_SPEED && is_action_pressed_and_available(CONTROL_RIGHT):
 		player_sprites.set_flip_h(false)
 		velocity.x += WALK_SPEED * AIR_DIRECTION_MULTIPLIER
-	elif !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
+	elif !is_action_pressed_and_available(CONTROL_LEFT) && !is_action_pressed_and_available(CONTROL_RIGHT):
 		velocity.x *= AIR_FRICTION_MULTIPLIER
 		
 	velocity.x = clamp(velocity.x, -RUN_SPEED, RUN_SPEED)
@@ -112,18 +124,18 @@ func integrate_climbing(state):
 	player_sprites.play("jump")
 	var velocity = state.get_linear_velocity()
 	
-	if Input.is_action_pressed("move_up"):
+	if is_action_pressed_and_available(CONTROL_UP):
 		velocity.y = -CLIMB_SPEED
-	elif Input.is_action_pressed("move_down"):
+	elif is_action_pressed_and_available(CONTROL_DOWN):
 		velocity.y = CLIMB_SPEED
 	else:
 		velocity.y = 0
 	
-	if Input.is_action_pressed("move_left"):
-		velocity.x = - WALK_SPEED * GROUND_ACCELERATION_MULTIPLIER
+	if is_action_pressed_and_available(CONTROL_LEFT):
+		velocity.x = - WALK_SPEED * 0.6
 		player_sprites.set_flip_h(true)
-	elif Input.is_action_pressed("move_right"):
-		velocity.x = WALK_SPEED * GROUND_ACCELERATION_MULTIPLIER
+	elif is_action_pressed_and_available(CONTROL_RIGHT):
+		velocity.x = WALK_SPEED * 0.6
 		player_sprites.set_flip_h(false)
 	else:
 		velocity.x = 0
@@ -141,85 +153,88 @@ func _process(delta):
 		can_climb = area extends climb_area
 
 	if fsm == IDLE:
-		if Input.is_action_pressed("jump"):
+		if is_action_pressed_and_available(CONTROL_JUMP):
 			fsm = JUMPING
-			print("idle -> jump")
-		elif Input.is_action_pressed("move_left") || Input.is_action_pressed("move_right"):
+			if debug: print("idle -> jump")
+		elif is_action_pressed_and_available(CONTROL_LEFT) || is_action_pressed_and_available(CONTROL_RIGHT):
 			fsm = WALKING
-			print("idle -> walk")
-		elif can_climb && ((Input.is_action_pressed("move_up") && !test_motion(Vector2(0,-5))) || (Input.is_action_pressed("move_down") && !test_motion(Vector2(0,5)))):
+			if debug: print("idle -> walk")
+		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
 			#check if can climb and if thera are obstacles where we want to climb
 			fsm = CLIMBING
-			print("idle -> climb")
+			if debug: print("idle -> climb")
 		elif !test_motion(Vector2(0,5)):
 			fsm = FALLING
-			print("idle -> fall")
+			if debug: print("idle -> fall")
 			
 	elif fsm == WALKING:
-		if !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
+		if !is_action_pressed_and_available(CONTROL_LEFT) && !is_action_pressed_and_available(CONTROL_RIGHT):
 			fsm = IDLE
-			print("walk -> idle")
-		elif Input.is_action_pressed("run"):
+			if debug: print("walk -> idle")
+		elif is_action_pressed_and_available(CONTROL_RUN):
 			fsm = RUNNING
-			print("walk -> run")
-		elif Input.is_action_pressed("jump"):
+			if debug: print("walk -> run")
+		elif is_action_pressed_and_available(CONTROL_JUMP):
 			fsm = JUMPING
-			print("walk -> jump")
-		elif can_climb && ((Input.is_action_pressed("move_up") && !test_motion(Vector2(0,-5))) || (Input.is_action_pressed("move_down") && !test_motion(Vector2(0,5)))):
+			if debug: print("walk -> jump")
+		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
 			fsm = CLIMBING
-			print("walk -> climb")
+			if debug: print("walk -> climb")
 		elif !test_motion(Vector2(0,5)):
 			fsm = FALLING
-			print("walk -> fall")
+			if debug: print("walk -> fall")
 			
 	elif fsm == RUNNING:
-		if !Input.is_action_pressed("run"):
+		if !is_action_pressed_and_available(CONTROL_RUN):
 			fsm = WALKING
-			print("run -> walk")
-		elif !Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
+			if debug: print("run -> walk")
+		elif !is_action_pressed_and_available(CONTROL_LEFT) && !is_action_pressed_and_available(CONTROL_RIGHT):
 			fsm = IDLE
-			print("run -> idle")
-		elif Input.is_action_pressed("jump"):
+			if debug: print("run -> idle")
+		elif is_action_pressed_and_available(CONTROL_JUMP):
 			fsm = JUMPING
-			print("run -> jump")
-		elif can_climb && ((Input.is_action_pressed("move_up") && !test_motion(Vector2(0,-5))) || (Input.is_action_pressed("move_down") && !test_motion(Vector2(0,5)))):
+			if debug: print("run -> jump")
+		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
 			#check if can climb and if thera are obstacles where we want to climb
 			fsm = CLIMBING
-			print("run -> climb")
+			if debug: print("run -> climb")
 		elif !test_motion(Vector2(0,5)):
 			fsm = FALLING
-			print("run -> fall")
+			if debug: print("run -> fall")
 			
 	elif fsm == CLIMBING:
 		if !can_climb:
 			fsm = FALLING
-			print("climb -> fall")
-		elif Input.is_action_pressed("jump"):
+			if debug: print("climb -> fall")
+		elif is_action_pressed_and_available(CONTROL_JUMP):
 			fsm = JUMPING
-			print("climb -> jump")
-		elif test_motion(Vector2(0,5)):
+			if debug: print("climb -> jump")
+		elif !is_action_pressed_and_available(CONTROL_UP) && !is_action_pressed_and_available(CONTROL_DOWN) && test_motion(Vector2(0,5)):
 			fsm = IDLE
-			print("climb -> idle")
+			if debug: print("climb -> idle")
 			
 	elif fsm == FALLING:
 		falling_time += delta
-		if can_climb && ((Input.is_action_pressed("move_up") && !test_motion(Vector2(0,-5))) || (Input.is_action_pressed("move_down") && !test_motion(Vector2(0,5)))):
+		if can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
 			#check if can climb and if thera are obstacles where we want to climb
 			fsm = CLIMBING
 			falling_time = 0
-			print("fall -> climb")
+			if debug: print("fall -> climb")
 		elif test_motion(Vector2(0,5)):
 			fsm = IDLE
 			falling_time = 0
-			print("fall -> idle")
-		elif Input.is_action_pressed("jump") && falling_time < FALLING_JUMP_DELAY:
+			if debug: print("fall -> idle")
+		elif is_action_pressed_and_available(CONTROL_JUMP) && falling_time < FALLING_JUMP_DELAY:
 			fsm = JUMPING
-			print("fall -> jump")
+			if debug: print("fall -> jump")
 			
 	elif fsm == JUMPING:
 		jump_time += delta
-		if !Input.is_action_pressed("jump") || jump_time > JUMP_TIME_MAX:
+		if !is_action_pressed_and_available(CONTROL_JUMP) || jump_time > JUMP_TIME_MAX:
 			fsm = FALLING
 			jump_time = 0
 			falling_time = FALLING_JUMP_DELAY
-			print("jump -> fall")
+			if debug: print("jump -> fall")
+			
+func is_action_pressed_and_available(action):
+	return (action == control_1 || action == control_2) && Input.is_action_pressed(action)
