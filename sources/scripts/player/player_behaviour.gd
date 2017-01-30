@@ -13,6 +13,7 @@ func die():
 func change_controls(control_1, control_2):
 	player.control_1 = control_1
 	player.control_2 = control_2
+	player.emit_signal("controls_changed", player)
 	
 func exit():
 	print("exit")

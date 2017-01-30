@@ -1,5 +1,7 @@
 extends Node
 
+signal controls_changed
+
 var debug = false
 
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
@@ -10,7 +12,7 @@ onready var interaction_area = get_node("interaction_area")
 const WALK_SPEED = 200
 const JUMP_SPEED = 300
 const RUN_SPEED = 500
-const CLIMB_SPEED = 100
+const CLIMB_SPEED = 200
 const GROUND_FRICTION_MULTIPLIER = 0.7
 const GROUND_ACCELERATION_MULTIPLIER = 0.2
 const AIR_FRICTION_MULTIPLIER = 0.95
@@ -128,8 +130,6 @@ func integrate_climbing(state):
 		velocity.y = -CLIMB_SPEED
 	elif is_action_pressed_and_available(CONTROL_DOWN):
 		velocity.y = CLIMB_SPEED
-	else:
-		velocity.y = 0
 	
 	if is_action_pressed_and_available(CONTROL_LEFT):
 		velocity.x = - WALK_SPEED * 0.6
