@@ -120,7 +120,21 @@ func integrate_falling(state):
 	
 func integrate_jumping(state):
 	player_sprites.play("jump")
-	state.set_linear_velocity(Vector2(state.get_linear_velocity().x,-JUMP_SPEED))
+	var velocity = state.get_linear_velocity()
+	
+	if velocity.x > -WALK_SPEED && is_action_pressed_and_available(CONTROL_LEFT):
+		player_sprites.set_flip_h(true)
+		velocity.x -= WALK_SPEED * AIR_DIRECTION_MULTIPLIER
+	elif velocity.x < WALK_SPEED && is_action_pressed_and_available(CONTROL_RIGHT):
+		player_sprites.set_flip_h(false)
+		velocity.x += WALK_SPEED * AIR_DIRECTION_MULTIPLIER
+	elif !is_action_pressed_and_available(CONTROL_LEFT) && !is_action_pressed_and_available(CONTROL_RIGHT):
+		velocity.x *= AIR_FRICTION_MULTIPLIER
+		
+	velocity.x = clamp(velocity.x, -RUN_SPEED, RUN_SPEED)
+	
+	velocity.y = -JUMP_SPEED
+	state.set_linear_velocity(velocity)
 
 func integrate_climbing(state):
 	player_sprites.play("jump")

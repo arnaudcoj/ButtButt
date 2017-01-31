@@ -7,8 +7,7 @@ func _ready():
 	pass
 
 func die():
-	get_tree().reload_current_scene()
-	#player.queue_free()
+	get_tree().get_root().get_node("root").restart()
 
 func change_controls(control_1, control_2):
 	player.control_1 = control_1
@@ -16,5 +15,4 @@ func change_controls(control_1, control_2):
 	player.emit_signal("controls_changed", player)
 	
 func exit():
-	print("exit")
-	get_tree().reload_current_scene()
+	get_tree().get_root().get_node("root").restart()
