@@ -15,7 +15,7 @@ func _ready():
 	set_process(true)
 	
 func _input(event):
-	if loaded_level != null && event.type == InputEvent.KEY && level.get_child_count() == 0 && transition_screen.is_ready():
+	if loaded_level != null && (event.type == InputEvent.KEY || event.type == InputEvent.SCREEN_TOUCH) && level.get_child_count() == 0 && transition_screen.is_ready():
 		transition_screen.play_split()
 		load_level()
 	elif level.get_child_count() != 0 && event.is_action_pressed("restart"):

@@ -21,12 +21,10 @@ func _on_animation_finished():
 func random_animation():
 	var animation_list = animation.get_animation_list()
 	var index = randi() % animation_list.size()
-	print(animation_list[index])
 	return animation_list[index]
 
 func random_speed():
 	var speed = randf() + 0.5
-	print(speed)
 	return speed
 
 func stop():

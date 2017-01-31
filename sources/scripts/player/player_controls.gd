@@ -42,8 +42,26 @@ const CONTROL_JUMP = "jump"
 export var control_1 = CONTROL_RIGHT
 export var control_2 = CONTROL_DOWN
 
+var touchscreen_left = -1
+var touchscreen_right = -1
+
 func _ready():
 	set_process(true)
+	set_process_input(true)
+	
+func _input(event):
+	if event.type == InputEvent.SCREEN_TOUCH:
+		if event.pressed:
+			#print(get_viewport().get_rect().size.x, " ", event.pos.x, " ", get_viewport().get_rect().size.x / 2)
+			if event.pos.x > get_viewport().get_rect().size.x / 2 && touchscreen_right == -1:
+				touchscreen_right = event.index
+			elif touchscreen_left == -1:
+				touchscreen_left = event.index
+		else:
+			if event.index == touchscreen_right:
+				touchscreen_right = -1
+			elif event.index == touchscreen_left:
+				touchscreen_left = -1
 	
 func _integrate_forces(state):
 	if fsm == IDLE:
@@ -251,4 +269,4 @@ func _process(delta):
 			if debug: print("jump -> fall")
 			
 func is_action_pressed_and_available(action):
-	return (action == control_1 || action == control_2) && Input.is_action_pressed(action)
+	return ((action == control_1 || action == control_2) && Input.is_action_pressed(action)) || (touchscreen_left != -1 && action == control_1) || (touchscreen_right != -1 && action == control_2)
