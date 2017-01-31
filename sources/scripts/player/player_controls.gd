@@ -52,8 +52,8 @@ func _ready():
 func _input(event):
 	if event.type == InputEvent.SCREEN_TOUCH:
 		if event.pressed:
-			#print(get_viewport().get_rect().size.x, " ", event.pos.x, " ", get_viewport().get_rect().size.x / 2)
-			if event.pos.x > get_viewport().get_rect().size.x / 2 && touchscreen_right == -1:
+			print(OS.get_window_size().x, " ", event.pos.x, " ", OS.get_window_size().x / 2)
+			if event.pos.x > 1024 / 2 && touchscreen_right == -1:
 				touchscreen_right = event.index
 			elif touchscreen_left == -1:
 				touchscreen_left = event.index
