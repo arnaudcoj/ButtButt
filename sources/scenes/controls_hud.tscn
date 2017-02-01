@@ -1,17 +1,17 @@
 [gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://sources/scripts/controls_hud.gd" type="Script" id=1]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight43.png" type="Texture" id=2]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight24.png" type="Texture" id=3]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight25.png" type="Texture" id=4]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight23.png" type="Texture" id=5]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight39.png" type="Texture" id=6]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight22.png" type="Texture" id=7]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight22.png" type="Texture" id=2]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight23.png" type="Texture" id=3]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight43.png" type="Texture" id=4]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight39.png" type="Texture" id=5]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight25.png" type="Texture" id=6]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight24.png" type="Texture" id=7]
 [ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight26.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 
-animations = [ { "frames":[ ExtResource( 2 ) ], "loop":false, "name":"jump", "speed":1.0 }, { "frames":[ ExtResource( 3 ) ], "loop":false, "name":"move_up", "speed":1.0 }, { "frames":[ ExtResource( 4 ) ], "loop":false, "name":"move_down", "speed":1.0 }, { "frames":[ ExtResource( 5 ) ], "loop":false, "name":"move_right", "speed":1.0 }, { "frames":[ ExtResource( 6 ) ], "loop":false, "name":"run", "speed":1.0 }, { "frames":[ ExtResource( 7 ) ], "loop":false, "name":"move_left", "speed":1.0 } ]
+animations = [ { "frames":[ ExtResource( 2 ) ], "loop":false, "name":"move_left", "speed":1.0 }, { "frames":[ ExtResource( 3 ) ], "loop":false, "name":"move_right", "speed":1.0 }, { "frames":[ ExtResource( 4 ) ], "loop":false, "name":"jump", "speed":1.0 }, { "frames":[ ExtResource( 5 ) ], "loop":false, "name":"run", "speed":1.0 }, { "frames":[ ExtResource( 6 ) ], "loop":false, "name":"move_down", "speed":1.0 }, { "frames":[ ExtResource( 7 ) ], "loop":false, "name":"move_up", "speed":1.0 } ]
 
 [node name="controls_hud" type="CanvasLayer"]
 
@@ -23,10 +23,11 @@ script/script = ExtResource( 1 )
 
 [node name="control_1_sprite" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 110, 490 )
+transform/pos = Vector2( 150, 450 )
 transform/scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "move_up"
+__meta__ = { "_edit_group_":true }
 
 [node name="particles" type="Particles2D" parent="control_1_sprite"]
 
@@ -60,10 +61,11 @@ randomness/linear_velocity = 1.0
 
 [node name="control_2_sprite" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 910, 490 )
+transform/pos = Vector2( 870, 450 )
 transform/scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "move_up"
+__meta__ = { "_edit_group_":true }
 
 [node name="particles" type="Particles2D" parent="control_2_sprite"]
 

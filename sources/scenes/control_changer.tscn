@@ -2,12 +2,12 @@
 
 [ext_resource path="res://sources/scripts/control_changer.gd" type="Script" id=1]
 [ext_resource path="res://sources/assets/sprites/HUD/hud_gem_blue.png" type="Texture" id=2]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight43.png" type="Texture" id=3]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight24.png" type="Texture" id=4]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight25.png" type="Texture" id=5]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight23.png" type="Texture" id=6]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight39.png" type="Texture" id=7]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight22.png" type="Texture" id=8]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight22.png" type="Texture" id=3]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight23.png" type="Texture" id=4]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight43.png" type="Texture" id=5]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight39.png" type="Texture" id=6]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight25.png" type="Texture" id=7]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight24.png" type="Texture" id=8]
 [ext_resource path="res://sources/assets/sprites/Items/gemBlue.png" type="Texture" id=9]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -17,10 +17,12 @@ radius = 25.7161
 
 [sub_resource type="SpriteFrames" id=2]
 
-animations = [ { "frames":[ ExtResource( 3 ) ], "loop":false, "name":"jump", "speed":1.0 }, { "frames":[ ExtResource( 4 ) ], "loop":false, "name":"move_up", "speed":1.0 }, { "frames":[ ExtResource( 5 ) ], "loop":false, "name":"move_down", "speed":1.0 }, { "frames":[ ExtResource( 6 ) ], "loop":false, "name":"move_right", "speed":1.0 }, { "frames":[ ExtResource( 7 ) ], "loop":false, "name":"run", "speed":1.0 }, { "frames":[ ExtResource( 8 ) ], "loop":false, "name":"move_left", "speed":1.0 } ]
+animations = [ { "frames":[ ExtResource( 3 ) ], "loop":false, "name":"move_left", "speed":1.0 }, { "frames":[ ExtResource( 4 ) ], "loop":false, "name":"move_right", "speed":1.0 }, { "frames":[ ExtResource( 5 ) ], "loop":false, "name":"jump", "speed":1.0 }, { "frames":[ ExtResource( 6 ) ], "loop":false, "name":"run", "speed":1.0 }, { "frames":[ ExtResource( 7 ) ], "loop":false, "name":"move_down", "speed":1.0 }, { "frames":[ ExtResource( 8 ) ], "loop":false, "name":"move_up", "speed":1.0 } ]
 
 [node name="control_changer" type="Area2D"]
 
+transform/pos = Vector2( 35, 35 )
+transform/scale = Vector2( 1.09375, 1.09375 )
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -33,12 +35,6 @@ script/script = ExtResource( 1 )
 __meta__ = { "_edit_group_":true }
 control_1 = "move_right"
 control_2 = "move_left"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -122,5 +118,11 @@ params/anim_initial_pos = 0.0
 randomness/direction = 1.0
 randomness/spread = 1.0
 randomness/linear_velocity = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 
