@@ -4,6 +4,16 @@ signal controls_changed
 
 var debug = false
 
+const CONTROL_UP = "move_up"
+const CONTROL_DOWN = "move_down"
+const CONTROL_LEFT = "move_left"
+const CONTROL_RIGHT = "move_right"
+const CONTROL_RUN = "run"
+const CONTROL_JUMP = "jump"
+
+export var control_1 = CONTROL_RIGHT
+export var control_2 = CONTROL_DOWN
+
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
 
 onready var player_sprites = get_node("sprites")
@@ -32,27 +42,22 @@ const FALLING = 4
 const CLIMBING = 5
 var fsm = IDLE
 
-const CONTROL_UP = "move_up"
-const CONTROL_DOWN = "move_down"
-const CONTROL_LEFT = "move_left"
-const CONTROL_RIGHT = "move_right"
-const CONTROL_RUN = "run"
-const CONTROL_JUMP = "jump"
-
-export var control_1 = CONTROL_RIGHT
-export var control_2 = CONTROL_DOWN
-
 var touchscreen_left = -1
 var touchscreen_right = -1
+
+const JUMP_NOT_PRESSED = -1
+const JUMP_PRESSED_LEFT = 0
+const JUMP_PRESSED_RIGHT = 1
+var jump_pressed = JUMP_NOT_PRESSED
 
 func _ready():
 	set_process(true)
 	set_process_input(true)
 	
 func _input(event):
+			
 	if event.type == InputEvent.SCREEN_TOUCH:
 		if event.pressed:
-			print(OS.get_window_size().x, " ", event.pos.x, " ", OS.get_window_size().x / 2)
 			if event.pos.x > 1024 / 2 && touchscreen_right == -1:
 				touchscreen_right = event.index
 			elif touchscreen_left == -1:
@@ -62,6 +67,15 @@ func _input(event):
 				touchscreen_right = -1
 			elif event.index == touchscreen_left:
 				touchscreen_left = -1
+		
+		#if we release jump button we can jump again
+		if touchscreen_left == -1 && jump_pressed == JUMP_PRESSED_LEFT:
+			jump_pressed = JUMP_NOT_PRESSED
+		elif touchscreen_right == -1 && jump_pressed == JUMP_PRESSED_RIGHT:
+			jump_pressed = JUMP_NOT_PRESSED
+	elif event.type == InputEvent.KEY:
+		if event.is_action_released("jump"):
+			jump_pressed = JUMP_NOT_PRESSED
 	
 func _integrate_forces(state):
 	if fsm == IDLE:
@@ -138,6 +152,12 @@ func integrate_falling(state):
 	
 func integrate_jumping(state):
 	player_sprites.play("jump")
+	if jump_pressed == JUMP_NOT_PRESSED:
+		if control_1 == "jump":
+			jump_pressed = JUMP_PRESSED_LEFT
+		elif control_2 == "jump":
+			jump_pressed = JUMP_PRESSED_RIGHT
+			
 	var velocity = state.get_linear_velocity()
 	
 	if velocity.x > -WALK_SPEED && is_action_pressed_and_available(CONTROL_LEFT):
@@ -185,7 +205,7 @@ func _process(delta):
 		can_climb = area extends climb_area
 
 	if fsm == IDLE:
-		if is_action_pressed_and_available(CONTROL_JUMP):
+		if is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED:
 			fsm = JUMPING
 			if debug: print("idle -> jump")
 		elif is_action_pressed_and_available(CONTROL_LEFT) || is_action_pressed_and_available(CONTROL_RIGHT):
@@ -209,7 +229,7 @@ func _process(delta):
 		elif is_action_pressed_and_available(CONTROL_JUMP):
 			fsm = JUMPING
 			if debug: print("walk -> jump")
-		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
+		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && jump_pressed == JUMP_NOT_PRESSED && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
 			fsm = CLIMBING
 			if debug: print("walk -> climb")
 		elif !test_motion(Vector2(0,5)):
@@ -223,7 +243,7 @@ func _process(delta):
 		elif !is_action_pressed_and_available(CONTROL_LEFT) && !is_action_pressed_and_available(CONTROL_RIGHT):
 			fsm = IDLE
 			if debug: print("run -> idle")
-		elif is_action_pressed_and_available(CONTROL_JUMP):
+		elif is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED :
 			fsm = JUMPING
 			if debug: print("run -> jump")
 		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
@@ -238,7 +258,7 @@ func _process(delta):
 		if !can_climb:
 			fsm = FALLING
 			if debug: print("climb -> fall")
-		elif is_action_pressed_and_available(CONTROL_JUMP):
+		elif is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED :
 			fsm = JUMPING
 			if debug: print("climb -> jump")
 		elif !is_action_pressed_and_available(CONTROL_UP) && !is_action_pressed_and_available(CONTROL_DOWN) && test_motion(Vector2(0,5)):
@@ -256,7 +276,7 @@ func _process(delta):
 			fsm = IDLE
 			falling_time = 0
 			if debug: print("fall -> idle")
-		elif is_action_pressed_and_available(CONTROL_JUMP) && falling_time < FALLING_JUMP_DELAY:
+		elif is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED && falling_time < FALLING_JUMP_DELAY:
 			fsm = JUMPING
 			if debug: print("fall -> jump")
 			
@@ -270,3 +290,8 @@ func _process(delta):
 			
 func is_action_pressed_and_available(action):
 	return ((action == control_1 || action == control_2) && Input.is_action_pressed(action)) || (touchscreen_left != -1 && action == control_1) || (touchscreen_right != -1 && action == control_2)
+
+func change_controls(control_1, control_2):
+	self.control_1 = control_1
+	self.control_2 = control_2
+	emit_signal("controls_changed", self)
