@@ -55,7 +55,6 @@ func _ready():
 	set_process_input(true)
 	
 func _input(event):
-			
 	if event.type == InputEvent.SCREEN_TOUCH:
 		if event.pressed:
 			if event.pos.x > 1024 / 2 && touchscreen_right == -1:
@@ -68,16 +67,17 @@ func _input(event):
 			elif event.index == touchscreen_left:
 				touchscreen_left = -1
 		
-		#if we release jump button we can jump again
-		if touchscreen_left == -1 && jump_pressed == JUMP_PRESSED_LEFT:
-			jump_pressed = JUMP_NOT_PRESSED
-		elif touchscreen_right == -1 && jump_pressed == JUMP_PRESSED_RIGHT:
-			jump_pressed = JUMP_NOT_PRESSED
+			#if we release jump button we can jump again
+			if touchscreen_left == -1 && jump_pressed == JUMP_PRESSED_LEFT:
+				jump_pressed = JUMP_NOT_PRESSED
+			elif touchscreen_right == -1 && jump_pressed == JUMP_PRESSED_RIGHT:
+				jump_pressed = JUMP_NOT_PRESSED
 	elif event.type == InputEvent.KEY:
 		if event.is_action_released("jump"):
 			jump_pressed = JUMP_NOT_PRESSED
 	
 func _integrate_forces(state):
+	print(jump_pressed)
 	if fsm == IDLE:
 		integrate_idle(state)
 	elif fsm == WALKING:
@@ -152,12 +152,6 @@ func integrate_falling(state):
 	
 func integrate_jumping(state):
 	player_sprites.play("jump")
-	if jump_pressed == JUMP_NOT_PRESSED:
-		if control_1 == "jump":
-			jump_pressed = JUMP_PRESSED_LEFT
-		elif control_2 == "jump":
-			jump_pressed = JUMP_PRESSED_RIGHT
-			
 	var velocity = state.get_linear_velocity()
 	
 	if velocity.x > -WALK_SPEED && is_action_pressed_and_available(CONTROL_LEFT):
@@ -207,6 +201,7 @@ func _process(delta):
 	if fsm == IDLE:
 		if is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED:
 			fsm = JUMPING
+			set_jump_pressed()
 			if debug: print("idle -> jump")
 		elif is_action_pressed_and_available(CONTROL_LEFT) || is_action_pressed_and_available(CONTROL_RIGHT):
 			fsm = WALKING
@@ -226,10 +221,11 @@ func _process(delta):
 		elif is_action_pressed_and_available(CONTROL_RUN):
 			fsm = RUNNING
 			if debug: print("walk -> run")
-		elif is_action_pressed_and_available(CONTROL_JUMP):
+		elif is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED:
 			fsm = JUMPING
+			set_jump_pressed()
 			if debug: print("walk -> jump")
-		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && jump_pressed == JUMP_NOT_PRESSED && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
+		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
 			fsm = CLIMBING
 			if debug: print("walk -> climb")
 		elif !test_motion(Vector2(0,5)):
@@ -245,6 +241,7 @@ func _process(delta):
 			if debug: print("run -> idle")
 		elif is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED :
 			fsm = JUMPING
+			set_jump_pressed()
 			if debug: print("run -> jump")
 		elif can_climb && ((is_action_pressed_and_available(CONTROL_UP) && !test_motion(Vector2(0,-5))) || (is_action_pressed_and_available(CONTROL_DOWN) && !test_motion(Vector2(0,5)))):
 			#check if can climb and if thera are obstacles where we want to climb
@@ -260,6 +257,7 @@ func _process(delta):
 			if debug: print("climb -> fall")
 		elif is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED :
 			fsm = JUMPING
+			set_jump_pressed()
 			if debug: print("climb -> jump")
 		elif !is_action_pressed_and_available(CONTROL_UP) && !is_action_pressed_and_available(CONTROL_DOWN) && test_motion(Vector2(0,5)):
 			fsm = IDLE
@@ -278,6 +276,7 @@ func _process(delta):
 			if debug: print("fall -> idle")
 		elif is_action_pressed_and_available(CONTROL_JUMP) && jump_pressed == JUMP_NOT_PRESSED && falling_time < FALLING_JUMP_DELAY:
 			fsm = JUMPING
+			set_jump_pressed()
 			if debug: print("fall -> jump")
 			
 	elif fsm == JUMPING:
@@ -295,3 +294,10 @@ func change_controls(control_1, control_2):
 	self.control_1 = control_1
 	self.control_2 = control_2
 	emit_signal("controls_changed", self)
+
+func set_jump_pressed():
+	if jump_pressed == JUMP_NOT_PRESSED:
+		if control_1 == "jump":
+			jump_pressed = JUMP_PRESSED_LEFT
+		elif control_2 == "jump":
+			jump_pressed = JUMP_PRESSED_RIGHT
