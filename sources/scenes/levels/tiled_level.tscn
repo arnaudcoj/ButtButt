@@ -3,8 +3,8 @@
 [ext_resource path="res://sources/scenes/controls_hud.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sources/assets/fonts/cartwheel_200.fnt" type="BitmapFont" id=2]
 [ext_resource path="res://sources/assets/tileset.tres" type="TileSet" id=3]
-[ext_resource path="res://sources/scenes/player/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://sources/scenes/control_changer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sources/scenes/control_changer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sources/scenes/player/player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://sources/scenes/levels/death_zone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sources/scenes/levels/climb_area.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sources/scenes/exit.tscn" type="PackedScene" id=8]
@@ -57,6 +57,58 @@ occluder/light_mask = 1
 tile_data = IntArray( 131085, 17, 131089, 37, 196625, 37, 262161, 37, 327697, 37, 393233, 37, 458769, 37 )
 __meta__ = { "_edit_lock_":true }
 
+[node name="control_changers" type="Node" parent="tilemaps/back_objects"]
+
+editor/display_folded = true
+
+[node name="control_changer" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 172, 532 )
+control_1 = "move_left"
+control_2 = "move_right"
+
+[node name="control_changer1" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 594.658, 455.221 )
+control_1 = "jump"
+control_2 = "move_right"
+
+[node name="control_changer2" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 857.033, 527.165 )
+control_1 = "run"
+control_2 = "move_right"
+
+[node name="control_changer3" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1640.69, 732.69 )
+control_1 = "move_left"
+control_2 = "move_up"
+
+[node name="control_changer4" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 874.955, 313.519 )
+control_1 = "move_up"
+control_2 = "move_right"
+
+[node name="control_changer5" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1151.91, 104.254 )
+control_1 = "move_left"
+control_2 = "jump"
+
+[node name="control_changer6" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1155.72, 246.894 )
+control_1 = "move_left"
+control_2 = "run"
+
+[node name="control_changer7" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 814.419, 100.414 )
+control_1 = "jump"
+control_2 = "move_right"
+
 [node name="objects" type="TileMap" parent="tilemaps"]
 
 mode = 0
@@ -76,7 +128,7 @@ occluder/light_mask = 1
 tile_data = IntArray( -7, 26, -6, 26, -5, 26, -4, 26, -3, 26, -2, 26, -1, 26, -65536, 26, -65535, 24, 65529, 9, 65530, 9, 65531, 9, 65532, 9, 65533, 9, 65534, 9, 65535, 9, 0, 9, 17, 6, 131065, 9, 131066, 9, 131067, 9, 131068, 9, 131069, 9, 131070, 9, 131071, 9, 65536, 9, 65546, 6, 65553, 5, 65554, 54, 196600, 82, 196601, 9, 196602, 9, 196603, 9, 196604, 9, 196605, 9, 196606, 9, 196607, 9, 131072, 9, 131073, 80, 131082, 16, 131083, 17, 131084, 17, 131085, 29, 131086, 17, 131087, 17, 131088, 17, 262136, 65, 262137, 9, 262138, 9, 262139, 9, 262140, 9, 262141, 9, 262142, 9, 262143, 9, 196608, 9, 196621, 28, 196625, 29, 327672, 65, 327673, 9, 327674, 9, 327675, 9, 327676, 9, 327677, 9, 327678, 9, 327679, 9, 262144, 9, 262155, 62, 262157, 28, 262159, 16, 262160, 17, 262161, 28, 393208, 65, 393209, 9, 393210, 9, 393211, 9, 393212, 9, 393213, 9, 393214, 9, 393215, 9, 327680, 9, 327691, 73, 327692, 73, 327693, 74, 327695, 73, 327696, 74, 327697, 28, 458744, 65, 458745, 9, 458746, 9, 458747, 9, 458748, 9, 458749, 9, 458750, 9, 458751, 9, 393216, 9, 393225, 6, 393233, 28, 524280, 65, 524281, 9, 524282, 9, 524283, 9, 524284, 9, 524285, 9, 524286, 9, 524287, 9, 458752, 9, 458759, 19, 458760, 26, 458761, 26, 458762, 13, 458769, 28, 458771, 29, 458772, 11, 458773, 26, 458774, 26, 458775, 26, 458776, 26, 458777, 26, 458778, 26, 458779, 26, 458780, 26, 458781, 26, 589816, 65, 589817, 9, 589818, 9, 589819, 9, 589820, 9, 589821, 9, 589822, 9, 589823, 9, 524288, 9, 524289, 26, 524290, 26, 524291, 26, 524292, 26, 524293, 26, 524294, 26, 524295, 20, 524296, 32, 524297, 32, 524298, 32, 524299, 26, 524300, 26, 524301, 26, 524302, 26, 524303, 32, 524304, 26, 524305, 26, 524306, 26, 524307, 28, 524308, 29, 524312, 65, 524313, 65, 524314, 65, 524315, 65, 524316, 65, 524317, 65, 655352, 65, 655353, 9, 655354, 9, 655355, 9, 655356, 9, 655357, 9, 655358, 9, 655359, 9, 589824, 9, 589825, 9, 589826, 9, 589827, 9, 589828, 9, 589829, 9, 589830, 9, 589831, 9, 589832, 30, 589833, 30, 589834, 30, 589835, 9, 589836, 9, 589837, 9, 589838, 9, 589839, 30, 589840, 9, 589841, 65, 589842, 65, 589843, 26, 589844, 28, 589845, 29, 589848, 65, 589849, 65, 589850, 65, 589851, 65, 589852, 65, 589853, 65, 720888, 65, 720889, 9, 720890, 9, 720891, 9, 720892, 9, 720893, 9, 720894, 9, 720895, 9, 655360, 9, 655361, 9, 655362, 9, 655363, 9, 655364, 9, 655365, 9, 655366, 9, 655367, 9, 655368, 30, 655369, 30, 655370, 30, 655371, 9, 655372, 9, 655373, 9, 655374, 9, 655375, 30, 655376, 9, 655377, 65, 655378, 65, 655379, 65, 655380, 26, 655381, 28, 655384, 65, 655385, 65, 655386, 65, 655387, 65, 655388, 65, 655389, 65, 786424, 150, 786425, 37, 786426, 37, 786427, 37, 786428, 37, 786429, 37, 786430, 37, 786431, 37, 720896, 37, 720897, 37, 720898, 37, 720899, 37, 720900, 37, 720901, 37, 720902, 37, 720903, 37, 720904, 37, 720905, 37, 720906, 37, 720907, 37, 720908, 37, 720909, 37, 720910, 37, 720911, 37, 720912, 37, 720913, 37, 720914, 37, 720915, 150, 720916, 150, 720917, 165, 720918, 165, 720919, 165, 720920, 150, 720921, 150, 720922, 150, 720923, 150, 720924, 150, 720925, 150, 851960, 150, 851961, 150, 851962, 150, 851963, 150, 851964, 150, 851965, 150, 851966, 150, 851967, 150, 786432, 150, 786433, 150, 786434, 150, 786435, 150, 786436, 150, 786437, 150, 786438, 150, 786439, 150, 786440, 150, 786441, 150, 786442, 150, 786443, 150, 786444, 150, 786445, 150, 786446, 150, 786447, 150, 786448, 150, 786449, 150, 786450, 150, 786451, 150, 786452, 150, 786453, 150, 786454, 150, 786455, 150, 786456, 150, 786457, 150, 786458, 150, 786459, 150, 786460, 150, 786461, 150, 917496, 150, 917497, 150, 917498, 150, 917499, 150, 917500, 150, 917501, 150, 917502, 150, 917503, 150, 851968, 150, 851969, 150, 851970, 150, 851971, 150, 851972, 150, 851973, 150, 851974, 150, 851975, 150, 851976, 150, 851977, 150, 851978, 150, 851979, 150, 851980, 150, 851981, 150, 851982, 150, 851983, 150, 851984, 150, 851985, 150, 851986, 150, 851987, 150, 851988, 150, 851989, 150, 851990, 150, 851991, 150, 851992, 150, 851993, 150, 851994, 150, 851995, 150, 851996, 150, 851997, 150 )
 __meta__ = { "_edit_lock_":true }
 
-[node name="player" parent="tilemaps/objects" instance=ExtResource( 4 )]
+[node name="player" parent="tilemaps/objects" instance=ExtResource( 5 )]
 
 editor/display_folded = true
 transform/pos = Vector2( 172, 502 )
@@ -100,58 +152,6 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
-
-[node name="control_changers" type="Node" parent="tilemaps/objects"]
-
-editor/display_folded = true
-
-[node name="control_changer" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 172, 532 )
-control_1 = "move_left"
-control_2 = "move_right"
-
-[node name="control_changer1" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 594.658, 455.221 )
-control_1 = "jump"
-control_2 = "move_right"
-
-[node name="control_changer2" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 857.033, 527.165 )
-control_1 = "run"
-control_2 = "move_right"
-
-[node name="control_changer3" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 1640.69, 732.69 )
-control_1 = "move_left"
-control_2 = "move_up"
-
-[node name="control_changer4" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 874.955, 313.519 )
-control_1 = "move_up"
-control_2 = "move_right"
-
-[node name="control_changer5" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 1151.91, 104.254 )
-control_1 = "move_left"
-control_2 = "jump"
-
-[node name="control_changer6" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 1155.72, 246.894 )
-control_1 = "move_left"
-control_2 = "run"
-
-[node name="control_changer7" parent="tilemaps/objects/control_changers" instance=ExtResource( 5 )]
-
-transform/pos = Vector2( 814.419, 100.414 )
-control_1 = "jump"
-control_2 = "move_right"
 
 [node name="front_objects" type="TileMap" parent="tilemaps"]
 
