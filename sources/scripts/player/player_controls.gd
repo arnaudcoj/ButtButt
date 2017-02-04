@@ -11,8 +11,8 @@ const CONTROL_RIGHT = "move_right"
 const CONTROL_RUN = "run"
 const CONTROL_JUMP = "jump"
 
-export var control_1 = CONTROL_RIGHT
-export var control_2 = CONTROL_DOWN
+export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_1 = "move_right"
+export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_2 = "move_down"
 
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
 
@@ -77,7 +77,6 @@ func _input(event):
 			jump_pressed = JUMP_NOT_PRESSED
 	
 func _integrate_forces(state):
-	print(jump_pressed)
 	if fsm == IDLE:
 		integrate_idle(state)
 	elif fsm == WALKING:
