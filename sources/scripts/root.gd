@@ -18,8 +18,6 @@ func _input(event):
 	if loaded_level != null && (event.type == InputEvent.KEY || event.type == InputEvent.SCREEN_TOUCH) && level.get_child_count() == 0 && transition_screen.is_ready():
 		transition_screen.play_split()
 		load_level()
-	elif level.get_child_count() != 0 && event.is_action_pressed("restart"):
-		restart()
 		
 func _process(delta):
 	if loaded_level == null && queue.is_ready(first_level):
@@ -28,6 +26,7 @@ func _process(delta):
 		transition_screen.level_ready()
 
 func restart():
+	get_tree().set_pause(false)
 	for child in level.get_children():
 		child.queue_free()
 		transition_screen.reset()

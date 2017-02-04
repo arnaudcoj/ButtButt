@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://sources/scenes/controls_hud.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sources/assets/fonts/cartwheel_120.fnt" type="BitmapFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://sources/scenes/levels/death_zone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sources/scenes/levels/climb_area.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sources/scenes/exit.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sources/scenes/menu_screen.tscn" type="PackedScene" id=9]
 
 [node name="tiled_level" type="Node"]
 
@@ -215,6 +216,8 @@ transform/scale = Vector2( 1.09375, 2.1875 )
 [node name="exit" parent="exit_areas" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1992, 452 )
+
+[node name="menu_screen" parent="." instance=ExtResource( 9 )]
 
 [connection signal="controls_changed" from="tilemaps/objects/player" to="controls_hud" method="_on_player_controls_changed"]
 

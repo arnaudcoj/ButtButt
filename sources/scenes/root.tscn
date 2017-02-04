@@ -5,10 +5,13 @@
 
 [node name="root" type="Node"]
 
+process/pause_mode = 2
 script/script = ExtResource( 1 )
 first_level = "res://sources/scenes/levels/tiled_level.tscn"
 
 [node name="level" type="Node" parent="."]
+
+process/pause_mode = 1
 
 [node name="transition" parent="." instance=ExtResource( 2 )]
 

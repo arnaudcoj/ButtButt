@@ -57,10 +57,11 @@ func _ready():
 func _input(event):
 	if event.type == InputEvent.SCREEN_TOUCH:
 		if event.pressed:
-			if event.pos.x > 1024 / 2 && touchscreen_right == -1:
-				touchscreen_right = event.index
-			elif touchscreen_left == -1:
-				touchscreen_left = event.index
+			if event.pos.y > 200:
+				if event.pos.x > 1024 / 2 && touchscreen_right == -1:
+					touchscreen_right = event.index
+				elif touchscreen_left == -1:
+					touchscreen_left = event.index
 		else:
 			if event.index == touchscreen_right:
 				touchscreen_right = -1
@@ -75,6 +76,10 @@ func _input(event):
 	elif event.type == InputEvent.KEY:
 		if event.is_action_released("jump"):
 			jump_pressed = JUMP_NOT_PRESSED
+	
+func release_controls():
+	touchscreen_right = -1
+	touchscreen_left = -1
 	
 func _integrate_forces(state):
 	if fsm == IDLE:

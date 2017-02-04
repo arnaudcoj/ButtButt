@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://sources/scripts/title_screen.gd" type="Script" id=1]
-[ext_resource path="res://sources/scripts/title_animation_chang.gd" type="Script" id=2]
+[ext_resource path="res://sources/scripts/title_animation_changer.gd" type="Script" id=2]
 [ext_resource path="res://sources/assets/fonts/cartwheel_200.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://sources/scripts/load_press_start.gd" type="Script" id=4]
 [ext_resource path="res://sources/assets/fonts/cartwheel_40.fnt" type="BitmapFont" id=5]
@@ -152,6 +152,7 @@ autoplay = ""
 
 [node name="title" type="Node2D" parent="top_screen"]
 
+process/pause_mode = 2
 transform/pos = Vector2( 512, 150 )
 transform/scale = Vector2( 2, 2 )
 
