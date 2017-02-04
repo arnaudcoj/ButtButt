@@ -43,18 +43,18 @@ func handle_pause():
 			animation.play("open")
 			get_parent().get_node("tilemaps/objects/player").release_controls()
 			get_tree().set_pause(true)
+			menu_screen.reset()
 		else:
 			animation.play_backwards("open")
 			get_tree().set_pause(false)
+			menu_screen.stop()
 
 func _on_restart_button_pressed():
 	if open:
-		print("restart")
 		get_tree().get_root().get_node("root").restart()
 
 func _on_resume_button_pressed():
 	if open:
-		print("resume")
 		handle_pause()
 
 func _on_button_group_button_selected( button_idx ):
