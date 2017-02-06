@@ -1,14 +1,15 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://sources/scripts/menu_screen.gd" type="Script" id=1]
 [ext_resource path="res://sources/scripts/title_animation_changer.gd" type="Script" id=2]
 [ext_resource path="res://sources/assets/fonts/cartwheel_80.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://sources/assets/fonts/cartwheel_40.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight19.png" type="Texture" id=5]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight14.png" type="Texture" id=6]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight12.png" type="Texture" id=7]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight31.png" type="Texture" id=5]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight19.png" type="Texture" id=6]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight14.png" type="Texture" id=7]
+[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight12.png" type="Texture" id=8]
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=1]
 
 resource/name = "open"
 length = 0.5
@@ -75,7 +76,7 @@ tracks/11/interp = 1
 tracks/11/imported = false
 tracks/11/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 0.25, 0.554785 ), "update":0, "values":[ 1.0, 0.0 ] }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 
 resource/name = "start"
 length = 0.5
@@ -189,8 +190,8 @@ script/script = ExtResource( 1 )
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/open = SubResource( 8 )
-anims/start = SubResource( 7 )
+anims/open = SubResource( 1 )
+anims/start = SubResource( 2 )
 next/start = ""
 playback/active = true
 playback/speed = 1.0
@@ -249,7 +250,7 @@ margin/top = 82.0
 margin/right = -353.0
 margin/bottom = -17.0
 custom_fonts/font = ExtResource( 3 )
-text = "Menu"
+text = "Pause"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -263,44 +264,96 @@ wait_time = 5.0
 one_shot = false
 autostart = true
 
-[node name="button_group" type="HButtonArray" parent="menu_screen"]
+[node name="buttons" type="Container" parent="menu_screen"]
 
 anchor/right = 1
 anchor/bottom = 1
 focus/ignore_mouse = false
-focus/stop_mouse = false
+focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 196.0
-margin/top = 290.0
-margin/right = 100.0
+margin/left = 132.0
+margin/top = 240.0
+margin/right = 36.0
 margin/bottom = 50.0
-custom_fonts/font_selected = ExtResource( 4 )
+
+[node name="menu_button" type="Button" parent="menu_screen/buttons"]
+
+focus_neighbour/right = NodePath("../restart_button")
+focus_neighbour/bottom = NodePath("../restart_button")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -32.0
+margin/top = -25.0
+margin/right = 160.0
+margin/bottom = 29.0
 custom_fonts/font = ExtResource( 4 )
-custom_colors/font_color = Color( 1, 1, 1, 0.256824 )
+custom_colors/font_color = Color( 0.480469, 0.480469, 0.480469, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Menu"
+icon = ExtResource( 5 )
 flat = false
-button/count = 2
-button/min_button_size = 0.0
-button/align = 3
-button/0/text = "Restart"
-button/0/tooltip = ""
-button/0/icon = ExtResource( 5 )
-button/1/text = "Resume"
-button/1/tooltip = ""
-button/1/icon = ExtResource( 6 )
-button/selected = 1
+
+[node name="restart_button" type="Button" parent="menu_screen/buttons"]
+
+focus_neighbour/left = NodePath("../menu_button")
+focus_neighbour/top = NodePath("../menu_button")
+focus_neighbour/right = NodePath("../resume_button")
+focus_neighbour/bottom = NodePath("../resume_button")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 224.0
+margin/top = 25.0
+margin/right = 423.0
+margin/bottom = 79.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.480469, 0.480469, 0.480469, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Restart"
+icon = ExtResource( 6 )
+flat = false
+
+[node name="resume_button" type="Button" parent="menu_screen/buttons"]
+
+focus_neighbour/left = NodePath("../restart_button")
+focus_neighbour/top = NodePath("../restart_button")
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 480.0
+margin/top = -25.0
+margin/right = 672.0
+margin/bottom = 29.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.480469, 0.480469, 0.480469, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Resume"
+icon = ExtResource( 7 )
+flat = false
 
 [node name="pause_button" type="TouchScreenButton" parent="."]
 
 visibility/opacity = 0.0
 transform/pos = Vector2( 128, 100 )
 transform/scale = Vector2( 16, 8.33333 )
-normal = ExtResource( 7 )
+normal = ExtResource( 8 )
 pressed = null
 bitmask = null
 passby_press = false
 action = ""
 visibility_mode = 1
+__meta__ = { "_edit_lock_":true }
 
 [connection signal="finished" from="animation" to="." method="_on_animation_finished"]
 
@@ -308,8 +361,12 @@ visibility_mode = 1
 
 [connection signal="timeout" from="menu_screen/title/timer" to="menu_screen" method="_on_timer_timeout"]
 
-[connection signal="button_selected" from="menu_screen/button_group" to="." method="_on_button_group_button_selected"]
+[connection signal="pressed" from="menu_screen/buttons/menu_button" to="." method="_on_menu_button_pressed"]
 
-[connection signal="pressed" from="pause_button" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="menu_screen/buttons/restart_button" to="." method="_on_restart_button_pressed"]
+
+[connection signal="pressed" from="menu_screen/buttons/resume_button" to="." method="_on_resume_button_pressed"]
+
+[connection signal="released" from="pause_button" to="." method="_on_pause_button_released"]
 
 

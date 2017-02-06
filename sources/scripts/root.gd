@@ -15,7 +15,7 @@ func _ready():
 	set_process(true)
 	
 func _input(event):
-	if loaded_level != null && (event.type == InputEvent.KEY || event.type == InputEvent.SCREEN_TOUCH) && level.get_child_count() == 0 && transition_screen.is_ready():
+	if loaded_level != null && (event.type == InputEvent.KEY || event.type == InputEvent.SCREEN_TOUCH) && !event.pressed && level.get_child_count() == 0 && transition_screen.is_ready():
 		transition_screen.play_split()
 		load_level()
 		
@@ -25,14 +25,29 @@ func _process(delta):
 	if level.get_child_count() == 0 && loaded_level != null :
 		transition_screen.level_ready()
 
+func show_menu():
+	get_tree().set_pause(false)
+	transition_screen.reset()
+	for child in level.get_children():
+		child.queue_free()
+		queue.queue_resource(first_level)
+
 func restart():
 	get_tree().set_pause(false)
 	for child in level.get_children():
 		child.queue_free()
-		transition_screen.reset()
 		queue.queue_resource(first_level)
+	load_level()
 
 func load_level():
 	if loaded_level != null:
-		level.add_child(loaded_level.instance())
+		var instance = loaded_level.instance()
+		instance.connect("menu", self, "_on_menu_requested")
+		instance.connect("restart", self, "_on_restart_requested")
+		level.add_child(instance)
 	
+func _on_menu_requested():
+	show_menu()
+	
+func _on_restart_requested():
+	restart()

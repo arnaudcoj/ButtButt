@@ -1,18 +1,21 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
-[ext_resource path="res://sources/scenes/controls_hud.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sources/assets/fonts/cartwheel_120.fnt" type="BitmapFont" id=2]
-[ext_resource path="res://sources/assets/tileset.tres" type="TileSet" id=3]
-[ext_resource path="res://sources/scenes/control_changer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://sources/scenes/player/player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://sources/scenes/levels/death_zone.tscn" type="PackedScene" id=6]
-[ext_resource path="res://sources/scenes/levels/climb_area.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sources/scenes/exit.tscn" type="PackedScene" id=8]
-[ext_resource path="res://sources/scenes/menu_screen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sources/scripts/levels/level.gd" type="Script" id=1]
+[ext_resource path="res://sources/scenes/controls_hud.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sources/assets/fonts/cartwheel_120.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://sources/assets/tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://sources/scenes/control_changer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sources/scenes/player/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sources/scenes/levels/death_zone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sources/scenes/levels/climb_area.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sources/scenes/exit.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sources/scenes/menu_screen.tscn" type="PackedScene" id=10]
 
 [node name="tiled_level" type="Node"]
 
-[node name="controls_hud" parent="." instance=ExtResource( 1 )]
+script/script = ExtResource( 1 )
+
+[node name="controls_hud" parent="." instance=ExtResource( 2 )]
 
 [node name="title" type="Label" parent="controls_hud"]
 
@@ -29,7 +32,7 @@ margin/left = 512.0
 margin/top = 300.0
 margin/right = -512.0
 margin/bottom = 0.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 text = "ButtButt"
 align = 1
 valign = 1
@@ -41,9 +44,8 @@ max_lines_visible = -1
 
 [node name="back_objects" type="TileMap" parent="tilemaps"]
 
-visibility/visible = false
 mode = 0
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 4 )
 cell/size = Vector2( 70, 70 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -61,49 +63,49 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="control_changers" type="Node" parent="tilemaps/back_objects"]
 
-[node name="control_changer" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 175, 525 )
 control_1 = "move_left"
 control_2 = "move_right"
 
-[node name="control_changer1" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer1" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 595, 455 )
 control_1 = "jump"
 control_2 = "move_right"
 
-[node name="control_changer2" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer2" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 875, 455 )
 control_1 = "run"
 control_2 = "move_right"
 
-[node name="control_changer3" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer3" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 1715, 735 )
 control_1 = "move_left"
 control_2 = "move_up"
 
-[node name="control_changer4" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer4" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 875, 315 )
 control_1 = "move_up"
 control_2 = "move_right"
 
-[node name="control_changer5" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer5" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 1225, 105 )
 control_1 = "move_left"
 control_2 = "jump"
 
-[node name="control_changer6" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer6" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 1225, 245 )
 control_1 = "move_left"
 control_2 = "run"
 
-[node name="control_changer7" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 4 )]
+[node name="control_changer7" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 735, 105 )
 control_1 = "jump"
@@ -112,7 +114,7 @@ control_2 = "move_right"
 [node name="objects" type="TileMap" parent="tilemaps"]
 
 mode = 0
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 4 )
 cell/size = Vector2( 70, 70 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -128,7 +130,7 @@ occluder/light_mask = 1
 tile_data = IntArray( -7, 26, -6, 26, -5, 26, -4, 26, -3, 26, -2, 26, -1, 26, -65536, 26, -65535, 24, 65529, 9, 65530, 9, 65531, 9, 65532, 9, 65533, 9, 65534, 9, 65535, 9, 0, 9, 18, 6, 131065, 9, 131066, 9, 131067, 9, 131068, 9, 131069, 9, 131070, 9, 131071, 9, 65536, 9, 65545, 6, 65554, 5, 196600, 82, 196601, 9, 196602, 9, 196603, 9, 196604, 9, 196605, 9, 196606, 9, 196607, 9, 131072, 9, 131073, 80, 131081, 16, 131082, 17, 131083, 17, 131084, 17, 131085, 29, 131086, 17, 131087, 17, 131088, 17, 131089, 17, 131090, 17, 262136, 65, 262137, 9, 262138, 9, 262139, 9, 262140, 9, 262141, 9, 262142, 9, 262143, 9, 196608, 9, 196621, 28, 196626, 29, 327672, 65, 327673, 9, 327674, 9, 327675, 9, 327676, 9, 327677, 9, 327678, 9, 327679, 9, 262144, 9, 262155, 6, 262157, 28, 262159, 16, 262160, 17, 262161, 17, 262162, 28, 393208, 65, 393209, 9, 393210, 9, 393211, 9, 393212, 9, 393213, 9, 393214, 9, 393215, 9, 327680, 9, 327691, 17, 327692, 17, 327693, 18, 327695, 73, 327696, 74, 327698, 28, 458744, 65, 458745, 9, 458746, 9, 458747, 9, 458748, 9, 458749, 9, 458750, 9, 458751, 9, 393216, 9, 393225, 6, 393234, 28, 524280, 65, 524281, 9, 524282, 9, 524283, 9, 524284, 9, 524285, 9, 524286, 9, 524287, 9, 458752, 9, 458759, 19, 458760, 26, 458761, 26, 458762, 26, 458763, 26, 458764, 26, 458765, 26, 458766, 26, 458767, 26, 458769, 26, 458770, 26, 458771, 26, 458772, 29, 458774, 11, 458775, 26, 458776, 26, 458777, 26, 458778, 26, 458779, 26, 458780, 26, 458781, 26, 458782, 26, 458783, 26, 458784, 26, 589816, 65, 589817, 9, 589818, 9, 589819, 9, 589820, 9, 589821, 9, 589822, 9, 589823, 9, 524288, 9, 524289, 26, 524290, 26, 524291, 26, 524292, 26, 524293, 26, 524294, 26, 524295, 20, 524296, 32, 524297, 32, 524298, 32, 524299, 9, 524300, 9, 524301, 9, 524302, 9, 524303, 9, 524305, 9, 524306, 9, 524307, 9, 524308, 28, 524309, 29, 524313, 9, 524314, 9, 524315, 9, 524316, 9, 524317, 9, 524318, 9, 524319, 9, 524320, 9, 655352, 65, 655353, 9, 655354, 9, 655355, 9, 655356, 9, 655357, 9, 655358, 9, 655359, 9, 589824, 9, 589825, 9, 589826, 9, 589827, 9, 589828, 9, 589829, 9, 589830, 9, 589831, 9, 589832, 30, 589833, 30, 589834, 30, 589835, 9, 589836, 9, 589837, 9, 589838, 9, 589839, 9, 589841, 9, 589842, 9, 589843, 9, 589844, 26, 589845, 28, 589846, 29, 589849, 9, 589850, 9, 589851, 9, 589852, 9, 589853, 9, 589854, 9, 589855, 9, 589856, 9, 720888, 65, 720889, 9, 720890, 9, 720891, 9, 720892, 9, 720893, 9, 720894, 9, 720895, 9, 655360, 9, 655361, 9, 655362, 9, 655363, 9, 655364, 9, 655365, 9, 655366, 9, 655367, 9, 655368, 30, 655369, 30, 655370, 30, 655371, 9, 655372, 9, 655373, 9, 655374, 9, 655375, 9, 655377, 9, 655378, 9, 655379, 9, 655380, 9, 655381, 26, 655382, 28, 655385, 9, 655386, 9, 655387, 9, 655388, 9, 655389, 9, 655390, 9, 655391, 9, 655392, 9, 786424, 150, 786425, 37, 786426, 37, 786427, 37, 786428, 37, 786429, 37, 786430, 37, 786431, 37, 720896, 37, 720897, 37, 720898, 37, 720899, 37, 720900, 37, 720901, 37, 720902, 37, 720903, 37, 720904, 37, 720905, 37, 720906, 37, 720907, 37, 720908, 37, 720909, 37, 720910, 37, 720911, 37, 720912, 37, 720913, 37, 720914, 37, 720915, 37, 720916, 37, 720917, 37, 720918, 38, 720919, 38, 720920, 38, 720921, 37, 720922, 37, 720923, 37, 720924, 37, 720925, 37, 720926, 37, 720927, 37, 720928, 37, 851960, 150, 851961, 37, 851962, 37, 851963, 37, 851964, 37, 851965, 37, 851966, 37, 851967, 37, 786432, 37, 786433, 37, 786434, 37, 786435, 37, 786436, 37, 786437, 37, 786438, 37, 786439, 37, 786440, 37, 786441, 37, 786442, 37, 786443, 37, 786444, 37, 786445, 37, 786446, 37, 786447, 37, 786448, 37, 786449, 37, 786450, 37, 786451, 37, 786452, 37, 786453, 37, 786454, 37, 786455, 37, 786456, 37, 786457, 37, 786458, 37, 786459, 37, 786460, 37, 786461, 37, 786462, 37, 786463, 37, 786464, 37, 917496, 150, 917497, 37, 917498, 37, 917499, 37, 917500, 37, 917501, 37, 917502, 37, 917503, 37, 851968, 37, 851969, 37, 851970, 37, 851971, 37, 851972, 37, 851973, 37, 851974, 37, 851975, 37, 851976, 37, 851977, 37, 851978, 37, 851979, 37, 851980, 37, 851981, 37, 851982, 37, 851983, 37, 851984, 37, 851985, 37, 851986, 37, 851987, 37, 851988, 37, 851989, 37, 851990, 37, 851991, 37, 851992, 37, 851993, 37, 851994, 37, 851995, 37, 851996, 37, 851997, 37, 851998, 37, 851999, 37, 852000, 37, 983033, 37, 983034, 37, 983035, 37, 983036, 37, 983037, 37, 983038, 37, 983039, 37, 917504, 37, 917505, 37, 917506, 37, 917507, 37, 917508, 37, 917509, 37, 917510, 37, 917511, 37, 917512, 37, 917513, 37, 917514, 37, 917515, 37, 917516, 37, 917517, 37, 917518, 37, 917519, 37, 917520, 37, 917521, 37, 917522, 37, 917523, 37, 917524, 37, 917525, 37, 917526, 37, 917527, 37, 917528, 37, 917529, 37, 917530, 37, 917531, 37, 917532, 37, 917533, 37, 917534, 37, 917535, 37, 917536, 37 )
 __meta__ = { "_edit_lock_":true }
 
-[node name="player" parent="tilemaps/objects" instance=ExtResource( 5 )]
+[node name="player" parent="tilemaps/objects" instance=ExtResource( 6 )]
 
 editor/display_folded = true
 transform/pos = Vector2( 172, 502 )
@@ -156,7 +158,7 @@ drag_margin/bottom = 0.2
 [node name="front_objects" type="TileMap" parent="tilemaps"]
 
 mode = 0
-tile_set = ExtResource( 3 )
+tile_set = ExtResource( 4 )
 cell/size = Vector2( 70, 70 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -174,51 +176,57 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="death_zones" type="Node" parent="."]
 
-[node name="death_zone" parent="death_zones" instance=ExtResource( 6 )]
+[node name="death_zone" parent="death_zones" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 778, 983.929 )
 transform/scale = Vector2( 85.0625, 4.49778 )
 
-[node name="death_zone1" parent="death_zones" instance=ExtResource( 6 )]
+[node name="death_zone1" parent="death_zones" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1155, 700 )
 transform/scale = Vector2( 1.09375, 2.1875 )
 
 [node name="climb_areas" type="Node" parent="."]
 
-[node name="climb_area" parent="climb_areas" instance=ExtResource( 7 )]
+[node name="climb_area" parent="climb_areas" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 945, 245 )
 transform/scale = Vector2( 1.09375, 3.28125 )
 
-[node name="climb_area1" parent="climb_areas" instance=ExtResource( 7 )]
+[node name="climb_area1" parent="climb_areas" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1295, 385 )
 transform/scale = Vector2( 1.09375, 3.28125 )
 
-[node name="climb_area2" parent="climb_areas" instance=ExtResource( 7 )]
+[node name="climb_area2" parent="climb_areas" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1435, 560 )
 transform/scale = Vector2( 1.09375, 2.1875 )
 
-[node name="climb_area3" parent="climb_areas" instance=ExtResource( 7 )]
+[node name="climb_area3" parent="climb_areas" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1505, 630 )
 transform/scale = Vector2( 1.09375, 2.1875 )
 
-[node name="climb_area4" parent="climb_areas" instance=ExtResource( 7 )]
+[node name="climb_area4" parent="climb_areas" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( 1575, 700 )
 transform/scale = Vector2( 1.09375, 2.1875 )
 
 [node name="exit_areas" type="Node" parent="."]
 
-[node name="exit" parent="exit_areas" instance=ExtResource( 8 )]
+[node name="exit" parent="exit_areas" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 1992, 452 )
 
-[node name="menu_screen" parent="." instance=ExtResource( 9 )]
+[node name="menu_screen" parent="." instance=ExtResource( 10 )]
 
 [connection signal="controls_changed" from="tilemaps/objects/player" to="controls_hud" method="_on_player_controls_changed"]
+
+[connection signal="menu" from="menu_screen" to="." method="_on_menu_requested"]
+
+[connection signal="pause" from="menu_screen" to="." method="_on_pause_requested"]
+
+[connection signal="restart" from="menu_screen" to="." method="_on_restart_requested"]
 
 
