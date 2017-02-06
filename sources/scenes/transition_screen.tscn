@@ -54,6 +54,11 @@ tracks/4/path = NodePath("top_screen/title/Label:visibility/self_opacity")
 tracks/4/interp = 1
 tracks/4/imported = false
 tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 1.0 ] }
+tracks/5/type = "value"
+tracks/5/path = NodePath("top_screen/title:transform/rot")
+tracks/5/interp = 1
+tracks/5/imported = false
+tracks/5/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 0.0 ] }
 
 [sub_resource type="Animation" id=3]
 
@@ -154,7 +159,6 @@ autoplay = ""
 
 process/pause_mode = 2
 transform/pos = Vector2( 512, 150 )
-transform/scale = Vector2( 2, 2 )
 
 [node name="Label" type="Label" parent="top_screen/title"]
 
