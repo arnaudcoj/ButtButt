@@ -14,4 +14,4 @@ func change_controls(control_1, control_2):
 		player.change_controls(control_1, control_2)
 	
 func exit():
-	get_tree().get_root().get_node("root").restart()
+	get_tree().get_root().get_node("root").show_menu()
