@@ -60,7 +60,7 @@ func _input(event):
 			if event.pos.y > 200:
 				if event.pos.x > 1024 / 2 && touchscreen_right == -1:
 					touchscreen_right = event.index
-				elif touchscreen_left == -1:
+				elif event.pos.x <= 1024 / 2 && touchscreen_left == -1:
 					touchscreen_left = event.index
 		else:
 			if event.index == touchscreen_right:
