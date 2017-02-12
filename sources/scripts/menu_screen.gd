@@ -18,6 +18,7 @@ func _ready():
 func _input(event):
 	if !open && event.is_action_released("start"):
 		handle_pause()
+		buttons.get_node("resume_button").grab_focus()
 
 
 func set_enabled(enabled):
@@ -32,7 +33,6 @@ func _on_animation_finished():
 func handle_pause():
 	if !animation.is_playing():
 		if !open:
-			buttons.get_node("resume_button").grab_focus()
 			animation.play("open")
 			emit_signal("pause")
 			get_tree().set_pause(true)
@@ -53,6 +53,7 @@ func _on_restart_button_pressed():
 func _on_resume_button_pressed():
 	if open:
 		handle_pause()
+		buttons.get_node("resume_button").release_focus()
 
 func _on_menu_button_pressed():
 	if open:
