@@ -143,10 +143,8 @@ func integrate_falling(state):
 	var velocity = state.get_linear_velocity()
 	
 	if velocity.x > -WALK_SPEED && is_action_pressed_and_available(CONTROL_LEFT):
-		player_sprites.set_flip_h(true)
 		velocity.x -= WALK_SPEED * AIR_DIRECTION_MULTIPLIER
 	elif velocity.x < WALK_SPEED && is_action_pressed_and_available(CONTROL_RIGHT):
-		player_sprites.set_flip_h(false)
 		velocity.x += WALK_SPEED * AIR_DIRECTION_MULTIPLIER
 	elif !is_action_pressed_and_available(CONTROL_LEFT) && !is_action_pressed_and_available(CONTROL_RIGHT):
 		velocity.x *= AIR_FRICTION_MULTIPLIER
