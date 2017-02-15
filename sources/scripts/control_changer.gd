@@ -1,5 +1,6 @@
 extends Area2D
 
+var buttbutt = preload("res://sources/scripts/player/buttbutt.gd")
 
 export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_1 = "move_right"
 export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_2 = "move_left"
@@ -19,6 +20,11 @@ func _ready():
 	connect("area_enter", self, "on_area_enter")
 
 func on_area_enter(area):
+	if area.get_parent() extends buttbutt:
+		area.get_parent().change_controls(control_1, control_2)
+		
+	print("TODO control_changers to reimplement with signals")
+	pass
 	if area.get_parent().has_node("behaviour"):
 		var behaviour = area.get_parent().get_node("behaviour")
 		if behaviour.has_method("change_controls"):

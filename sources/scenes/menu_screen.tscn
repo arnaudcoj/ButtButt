@@ -200,10 +200,12 @@ autoplay = "start"
 
 [node name="menu_screen" type="Polygon2D" parent="."]
 
-transform/pos = Vector2( 60, 10 )
+visibility/opacity = 0.0
+transform/pos = Vector2( 14.0297, 4.56818 )
+transform/scale = Vector2( 0.0618812, 0.120455 )
 polygon = Vector2Array( 68, 90, 836, 90, 836, 490, 68, 490 )
 uv = Vector2Array(  )
-color = Color( 0.376648, 0.558798, 0.945313, 1 )
+color = Color( 0.871216, 0.88494, 0.914063, 0.114745 )
 vertex_colors = ColorArray(  )
 offset = Vector2( 0, 0 )
 texture/texture = null
@@ -344,9 +346,7 @@ flat = false
 
 [node name="pause_button" type="TouchScreenButton" parent="."]
 
-visibility/opacity = 0.0
-transform/pos = Vector2( 128, 100 )
-transform/scale = Vector2( 16, 8.33333 )
+transform/pos = Vector2( 18, 15 )
 normal = ExtResource( 8 )
 pressed = null
 bitmask = null

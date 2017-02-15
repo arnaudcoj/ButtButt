@@ -1,0 +1,123 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://sources/scripts/player/buttbutt.gd" type="Script" id=1]
+[ext_resource path="res://sources/assets/sprites/buttbutt/right_arm.png" type="Texture" id=2]
+[ext_resource path="res://sources/assets/sprites/buttbutt/right_leg.png" type="Texture" id=3]
+[ext_resource path="res://sources/assets/sprites/buttbutt/right_ear.png" type="Texture" id=4]
+[ext_resource path="res://sources/assets/sprites/buttbutt/trunc.png" type="Texture" id=5]
+[ext_resource path="res://sources/assets/sprites/buttbutt/trousers.png" type="Texture" id=6]
+[ext_resource path="res://sources/assets/sprites/buttbutt/face.png" type="Texture" id=7]
+[ext_resource path="res://sources/assets/sprites/buttbutt/left_ear.png" type="Texture" id=8]
+[ext_resource path="res://sources/assets/sprites/buttbutt/left_arm.png" type="Texture" id=9]
+[ext_resource path="res://sources/assets/sprites/buttbutt/left_leg.png" type="Texture" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 18.0
+height = 28.0
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 21, 34 )
+
+[node name="buttbutt" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 1 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+debug = true
+control_1 = "move_right"
+control_2 = "move_left"
+
+[node name="skeleton" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="arm_r" type="Sprite" parent="skeleton"]
+
+texture = ExtResource( 2 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="leg_r" type="Sprite" parent="skeleton"]
+
+texture = ExtResource( 3 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="ear_r" type="Sprite" parent="skeleton"]
+
+texture = ExtResource( 4 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="trunc" type="Sprite" parent="skeleton"]
+
+texture = ExtResource( 5 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="butt" type="Sprite" parent="skeleton"]
+
+texture = ExtResource( 6 )
+
+[node name="remote_trunc" type="RemoteTransform2D" parent="skeleton/butt"]
+
+remote_path = NodePath("../../trunc")
+
+[node name="face" type="Sprite" parent="skeleton/butt/remote_trunc"]
+
+texture = ExtResource( 7 )
+
+[node name="ear_l" type="Sprite" parent="skeleton/butt/remote_trunc"]
+
+texture = ExtResource( 8 )
+
+[node name="arm_l" type="Sprite" parent="skeleton/butt/remote_trunc"]
+
+texture = ExtResource( 9 )
+
+[node name="remote_arm_r" type="RemoteTransform2D" parent="skeleton/butt/remote_trunc"]
+
+remote_path = NodePath("../../../arm_r")
+
+[node name="ear_r" type="RemoteTransform2D" parent="skeleton/butt/remote_trunc"]
+
+remote_path = NodePath("../../../ear_r")
+
+[node name="leg_l" type="Sprite" parent="skeleton/butt"]
+
+texture = ExtResource( 10 )
+
+[node name="remote_leg_r" type="RemoteTransform2D" parent="skeleton/butt"]
+
+remote_path = NodePath("../../leg_r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0, 1 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="interaction_area" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+
