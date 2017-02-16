@@ -2,9 +2,8 @@ extends Area2D
 
 var buttbutt = preload("res://sources/scripts/player/buttbutt.gd")
 
-export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_1 = "move_right"
-export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_2 = "move_left"
-
+export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_1 = "move_left"
+export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_2 = "move_right"
 
 onready var label_c1 = get_node("control_1")
 onready var label_c2 = get_node("control_2")

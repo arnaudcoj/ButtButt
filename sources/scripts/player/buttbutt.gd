@@ -33,13 +33,14 @@ var fsm = IDLE
 
 ## PHYSICS
 
-const GRAVITY = 200
+const GRAVITY = 500
 const WALK_SPEED = 150
-const JUMP_SPEED = 20
+const RUN_SPEED = 250
+const JUMP_SPEED = 50
 
 var velocity = Vector2()
 
-const MAX_JUMP_TIME = 0.2
+const MAX_JUMP_TIME = 0.1
 var jumping_time = 0
 
 #### ONREADY ####
@@ -60,7 +61,10 @@ func _input(event):
 # PHYSICS
 
 func update_physics(delta):
-	# first update the velocity according to the fsm state
+	# first update the velocity with gravity
+	update_gravity(delta)
+	
+	# next update the velocity according to the fsm state
 	if fsm == IDLE:
 		update_idle(delta)
 	elif fsm == WALKING:
@@ -74,34 +78,55 @@ func update_physics(delta):
 	elif fsm == CLIMBING:
 		update_climbing(delta)
 	
-	# next update the velocity with gravity
-	update_gravity(delta)
-	
 	# finally integrate the velocity into actual motion
 	integrate_motion(delta)
 	
 	
 func update_idle(delta):
 	velocity.y = 0
-	velocity.x /= 1.3
+	velocity.x = lerp(velocity.x, 0, 0.1)
 	
 func update_walking(delta):
 	if is_on_ground() :
 		velocity.y = 0
-		if available_action_pressed("move_left"):
-			velocity.x = -WALK_SPEED
+		if available_action_pressed("move_left") && available_action_pressed("move_right"):
+			velocity.x = lerp(velocity.x, 0, 0.2)
+		elif available_action_pressed("move_left"):
+			velocity.x = lerp(velocity.x, -WALK_SPEED, 0.2)
 		elif available_action_pressed("move_right"):
-			velocity.x = WALK_SPEED
+			velocity.x = lerp(velocity.x, WALK_SPEED, 0.2)
 
 func update_running(delta):
 	pass
 	
 func update_jumping(delta):
 	jumping_time += delta
+	if abs(velocity.x) < RUN_SPEED && available_action_pressed("run"):
+		if available_action_pressed("move_left"):
+			velocity.x = lerp(velocity.x, -RUN_SPEED, 0.3)
+		elif available_action_pressed("move_right"):
+			velocity.x = lerp(velocity.x, RUN_SPEED, 0.3)
+	elif abs(velocity.x) < WALK_SPEED && !available_action_pressed("run"):
+		if available_action_pressed("move_left"):
+			velocity.x = lerp(velocity.x, -WALK_SPEED, 0.3)
+		elif available_action_pressed("move_right"):
+			velocity.x = lerp(velocity.x, WALK_SPEED, 0.3)
+		
 	velocity.y -= JUMP_SPEED
 	
 func update_falling(delta):
-	velocity.x *= 0.98
+	if abs(velocity.x) < RUN_SPEED && available_action_pressed("run") && (available_action_pressed("move_left") || available_action_pressed("move_right")):
+		if available_action_pressed("move_left"):
+			velocity.x = lerp(velocity.x, -RUN_SPEED, 0.1)
+		elif available_action_pressed("move_right"):
+			velocity.x = lerp(velocity.x, RUN_SPEED, 0.1)
+	elif abs(velocity.x) < WALK_SPEED && !available_action_pressed("run") && (available_action_pressed("move_left") || available_action_pressed("move_right")):
+		if available_action_pressed("move_left"):
+			velocity.x = lerp(velocity.x, -WALK_SPEED, 0.05)
+		elif available_action_pressed("move_right"):
+			velocity.x = lerp(velocity.x, WALK_SPEED, 0.05)
+	else:
+		velocity.x = lerp(velocity.x, 0, 0.02)
 	
 func update_climbing(delta):
 	pass

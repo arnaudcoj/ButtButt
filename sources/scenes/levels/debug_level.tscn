@@ -170,19 +170,15 @@ texture = ExtResource( 4 )
 [node name="control_changer" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 926, 433 )
-control_1 = "move_left"
 control_2 = "jump"
 
 [node name="control_changer1" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 386, 433 )
-control_1 = "jump"
-control_2 = "move_right"
 
 [node name="buttbutt" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 387, 426 )
-debug = false
 
 [node name="Camera2D" type="Camera2D" parent="buttbutt"]
 
