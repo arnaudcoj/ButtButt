@@ -45,6 +45,9 @@ var jumping_time = 0
 
 #### ONREADY ####
 
+onready var interaction_area = get_node("interaction_area")
+onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
@@ -136,7 +139,12 @@ func update_falling(delta):
 		velocity.x = lerp(velocity.x, 0, 0.02)
 	
 func update_climbing(delta):
-	pass
+	if available_action_pressed("move_up"):
+		move(Vector2(0, -5))
+	elif available_action_pressed("move_down"):
+		move(Vector2(0, 5))
+	velocity.y = 0
+	velocity.x = 0
 
 func update_gravity(delta):
 	#velocity.y += delta * GRAVITY
@@ -182,6 +190,8 @@ func decide_fsm_idle(delta):
 		change_state(FALLING)
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
+	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+		change_state(CLIMBING)
 	elif available_action_pressed("move_left") || available_action_pressed("move_right") :
 		if available_action_pressed("run"):
 			change_state(RUNNING)
@@ -191,10 +201,12 @@ func decide_fsm_idle(delta):
 func decide_fsm_walking(delta):
 	if !is_on_ground():
 		change_state(FALLING)
-	elif available_action_pressed("run"):
-		change_state(RUNNING)
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
+	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+		change_state(CLIMBING)
+	elif available_action_pressed("run"):
+		change_state(RUNNING)
 	elif !available_action_pressed("move_left") && !available_action_pressed("move_right") :
 		change_state(IDLE)
 
@@ -203,6 +215,8 @@ func decide_fsm_running(delta):
 		change_state(FALLING)
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
+	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+		change_state(CLIMBING)
 	elif !available_action_pressed("move_left") && !available_action_pressed("move_right") :
 		change_state(IDLE)
 	elif !available_action_pressed("run"):
@@ -219,14 +233,27 @@ func decide_fsm_falling(delta):
 			change_state(WALKING)
 		else :
 			change_state(IDLE)
+	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+		change_state(CLIMBING)
 		
 func decide_fsm_climbing(delta):
-	pass
+	if available_action_pressed("jump"):
+		change_state(FALLING)
+	elif !can_climb():
+		change_state(FALLING)
+	elif is_on_ground() && available_action_pressed("move_down"):
+		change_state(IDLE)
 
 func change_state(id):
 	if debug:
 		print(get_fsm_name(fsm), " -> ", get_fsm_name(id))
 	fsm = id
+
+func can_climb():
+	for area in interaction_area.get_overlapping_areas():
+		if area extends climb_area:
+			return true
+	return false
 
 func get_fsm_name(id = -1):
 	if id == -1:

@@ -181,7 +181,6 @@ control_1 = "jump"
 [node name="buttbutt" parent="." instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 422, 412 )
-debug = false
 
 [node name="Camera2D" type="Camera2D" parent="buttbutt"]
 
