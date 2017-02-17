@@ -115,7 +115,7 @@ _update_shape_index = 0
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
-transform/pos = Vector2( 978, 520 )
+transform/pos = Vector2( 949, 520 )
 input/pickable = false
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -76, -15 )
@@ -126,6 +126,7 @@ constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+__meta__ = { "_edit_group_":true }
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D2"]
 
@@ -174,11 +175,13 @@ control_2 = "jump"
 
 [node name="control_changer1" parent="." instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 386, 433 )
+transform/pos = Vector2( 419, 424 )
+control_1 = "jump"
 
 [node name="buttbutt" parent="." instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 387, 426 )
+transform/pos = Vector2( 422, 412 )
+debug = false
 
 [node name="Camera2D" type="Camera2D" parent="buttbutt"]
 

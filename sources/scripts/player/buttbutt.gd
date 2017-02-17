@@ -34,8 +34,8 @@ var fsm = IDLE
 ## PHYSICS
 
 const GRAVITY = 500
-const WALK_SPEED = 150
-const RUN_SPEED = 250
+const WALK_SPEED = 125
+const RUN_SPEED = 350
 const JUMP_SPEED = 50
 
 var velocity = Vector2()
@@ -97,7 +97,14 @@ func update_walking(delta):
 			velocity.x = lerp(velocity.x, WALK_SPEED, 0.2)
 
 func update_running(delta):
-	pass
+	if is_on_ground() :
+		velocity.y = 0
+		if available_action_pressed("move_left") && available_action_pressed("move_right"):
+			velocity.x = lerp(velocity.x, 0, 0.2)
+		elif available_action_pressed("move_left"):
+			velocity.x = lerp(velocity.x, -RUN_SPEED, 0.2)
+		elif available_action_pressed("move_right"):
+			velocity.x = lerp(velocity.x, RUN_SPEED, 0.2)
 	
 func update_jumping(delta):
 	jumping_time += delta
@@ -122,9 +129,9 @@ func update_falling(delta):
 			velocity.x = lerp(velocity.x, RUN_SPEED, 0.1)
 	elif abs(velocity.x) < WALK_SPEED && !available_action_pressed("run") && (available_action_pressed("move_left") || available_action_pressed("move_right")):
 		if available_action_pressed("move_left"):
-			velocity.x = lerp(velocity.x, -WALK_SPEED, 0.05)
+			velocity.x = lerp(velocity.x, -WALK_SPEED, 0.2)
 		elif available_action_pressed("move_right"):
-			velocity.x = lerp(velocity.x, WALK_SPEED, 0.05)
+			velocity.x = lerp(velocity.x, WALK_SPEED, 0.2)
 	else:
 		velocity.x = lerp(velocity.x, 0, 0.02)
 	
@@ -132,7 +139,8 @@ func update_climbing(delta):
 	pass
 
 func update_gravity(delta):
-	velocity.y += delta * GRAVITY
+	#velocity.y += delta * GRAVITY
+	velocity.y = lerp(velocity.y, GRAVITY, 0.015)
 	
 func integrate_motion(delta):
 	var motion = velocity * delta
@@ -175,18 +183,30 @@ func decide_fsm_idle(delta):
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
 	elif available_action_pressed("move_left") || available_action_pressed("move_right") :
-		change_state(WALKING)
+		if available_action_pressed("run"):
+			change_state(RUNNING)
+		else:
+			change_state(WALKING)
 	
 func decide_fsm_walking(delta):
 	if !is_on_ground():
 		change_state(FALLING)
+	elif available_action_pressed("run"):
+		change_state(RUNNING)
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
 	elif !available_action_pressed("move_left") && !available_action_pressed("move_right") :
 		change_state(IDLE)
 
 func decide_fsm_running(delta):
-	pass
+	if !is_on_ground():
+		change_state(FALLING)
+	elif available_action_pressed("jump"):
+		change_state(JUMPING)
+	elif !available_action_pressed("move_left") && !available_action_pressed("move_right") :
+		change_state(IDLE)
+	elif !available_action_pressed("run"):
+		change_state(WALKING)
 
 func decide_fsm_jumping(delta):
 	if jumping_time > MAX_JUMP_TIME || !available_action_pressed("jump"):
