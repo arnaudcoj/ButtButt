@@ -33,10 +33,10 @@ var fsm = IDLE
 
 ## PHYSICS
 
-const GRAVITY = 500
+const GRAVITY = 800
 const WALK_SPEED = 125
 const RUN_SPEED = 350
-const JUMP_SPEED = 50
+const JUMP_SPEED = 70
 
 var velocity = Vector2()
 
@@ -152,7 +152,7 @@ func update_gravity(delta):
 	
 func integrate_motion(delta):
 	var motion = velocity * delta
-	move(motion)
+	move_and_slide(velocity)
 	
 	if is_colliding():
 		var n = get_collision_normal()
@@ -161,7 +161,7 @@ func integrate_motion(delta):
 		move(motion)
 	
 func is_on_ground():
-	 return test_move(Vector2(0, 1))
+	 return test_move(get_transform(), Vector2(0, 1))
 	
 func reset_jump():
 	jumping_time = 0
