@@ -141,6 +141,34 @@ shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+transform/pos = Vector2( 754, 346 )
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -76, -15 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_edit_group_":true }
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D3"]
+
+transform/pos = Vector2( -76, 0 )
+transform/scale = Vector2( 4.6, 1 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+
+transform/pos = Vector2( -76, -15 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
 [node name="StaticBody2D 2" type="StaticBody2D" parent="."]
 
 transform/pos = Vector2( 0.432098, 445.829 )
@@ -176,7 +204,7 @@ control_2 = "jump"
 [node name="control_changer1" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 419, 424 )
-control_1 = "jump"
+control_1 = "run"
 
 [node name="buttbutt" parent="." instance=ExtResource( 6 )]
 

@@ -139,10 +139,23 @@ func update_falling(delta):
 		velocity.x = lerp(velocity.x, 0, 0.02)
 	
 func update_climbing(delta):
+	var motion = Vector2()
+
 	if available_action_pressed("move_up"):
-		move(Vector2(0, -5))
+		motion.y = -5
 	elif available_action_pressed("move_down"):
-		move(Vector2(0, 5))
+		motion.y = 5
+		
+	if available_action_pressed("move_left"):
+		motion.x = -2
+	elif available_action_pressed("move_right"):
+		motion.x = 2
+	
+	move(motion)
+		
+	if !can_climb():
+		revert_motion()
+		
 	velocity.y = 0
 	velocity.x = 0
 
@@ -239,10 +252,10 @@ func decide_fsm_falling(delta):
 func decide_fsm_climbing(delta):
 	if available_action_pressed("jump"):
 		change_state(FALLING)
-	elif !can_climb():
+	elif is_on_ground() && (available_action_pressed("move_left") || available_action_pressed("move_right")) :
 		change_state(FALLING)
-	elif is_on_ground() && available_action_pressed("move_down"):
-		change_state(IDLE)
+	elif !can_climb() && !available_action_pressed("move_up"):
+		change_state(FALLING)
 
 func change_state(id):
 	if debug:

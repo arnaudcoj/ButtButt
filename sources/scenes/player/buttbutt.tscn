@@ -38,8 +38,6 @@ control_2 = "move_left"
 
 [node name="skeleton" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="arm_r" type="Sprite" parent="skeleton"]
 
 texture = ExtResource( 2 )
@@ -62,6 +60,7 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="butt" type="Sprite" parent="skeleton"]
 
+editor/display_folded = true
 texture = ExtResource( 6 )
 
 [node name="remote_trunc" type="RemoteTransform2D" parent="skeleton/butt"]
