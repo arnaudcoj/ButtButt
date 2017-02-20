@@ -37,6 +37,7 @@ const GRAVITY = 800
 const WALK_SPEED = 125
 const RUN_SPEED = 350
 const JUMP_SPEED = 70
+const CLIMB_SPEED = Vector2(70, 130)
 
 var velocity = Vector2()
 
@@ -139,22 +140,19 @@ func update_falling(delta):
 		velocity.x = lerp(velocity.x, 0, 0.02)
 	
 func update_climbing(delta):
-	var motion = Vector2()
+	var direction = Vector2()
 
-	if available_action_pressed("move_up"):
-		motion.y = -5
-	elif available_action_pressed("move_down"):
-		motion.y = 5
+	if available_action_pressed("move_up") && !reached_top():
+		direction.y -= 1
+	if available_action_pressed("move_down"):
+		direction.y += 1
 		
 	if available_action_pressed("move_left"):
-		motion.x = -2
-	elif available_action_pressed("move_right"):
-		motion.x = 2
+		direction.x -= 1
+	if available_action_pressed("move_right"):
+		direction.x += 1
 	
-	move(motion)
-		
-	if !can_climb():
-		revert_motion()
+	move_and_slide(direction * CLIMB_SPEED)
 		
 	velocity.y = 0
 	velocity.x = 0
@@ -203,7 +201,7 @@ func decide_fsm_idle(delta):
 		change_state(FALLING)
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
-	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+	elif can_climb() && !reached_top() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
 		change_state(CLIMBING)
 	elif available_action_pressed("move_left") || available_action_pressed("move_right") :
 		if available_action_pressed("run"):
@@ -216,7 +214,7 @@ func decide_fsm_walking(delta):
 		change_state(FALLING)
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
-	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+	elif can_climb() && !reached_top() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
 		change_state(CLIMBING)
 	elif available_action_pressed("run"):
 		change_state(RUNNING)
@@ -228,7 +226,7 @@ func decide_fsm_running(delta):
 		change_state(FALLING)
 	elif available_action_pressed("jump"):
 		change_state(JUMPING)
-	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+	elif can_climb() && !reached_top() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
 		change_state(CLIMBING)
 	elif !available_action_pressed("move_left") && !available_action_pressed("move_right") :
 		change_state(IDLE)
@@ -246,7 +244,7 @@ func decide_fsm_falling(delta):
 			change_state(WALKING)
 		else :
 			change_state(IDLE)
-	elif can_climb() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
+	elif can_climb() && !reached_top() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
 		change_state(CLIMBING)
 		
 func decide_fsm_climbing(delta):
@@ -254,7 +252,7 @@ func decide_fsm_climbing(delta):
 		change_state(FALLING)
 	elif is_on_ground() && (available_action_pressed("move_left") || available_action_pressed("move_right")) :
 		change_state(FALLING)
-	elif !can_climb() && !available_action_pressed("move_up"):
+	elif !can_climb():
 		change_state(FALLING)
 
 func change_state(id):
@@ -265,6 +263,12 @@ func change_state(id):
 func can_climb():
 	for area in interaction_area.get_overlapping_areas():
 		if area extends climb_area:
+			return true
+	return false
+
+func reached_top():
+	for area in interaction_area.get_overlapping_areas():
+		if area extends climb_area && area.is_on_top(interaction_area):
 			return true
 	return false
 
