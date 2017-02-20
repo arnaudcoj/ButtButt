@@ -38,7 +38,7 @@ var fsm = IDLE
 ## PHYSICS
 
 const GRAVITY = 800
-const WALK_SPEED = 125
+const WALK_SPEED = 150
 const RUN_SPEED = 350
 const JUMP_SPEED = 70
 const CLIMB_SPEED = Vector2(70, 130)

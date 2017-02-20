@@ -1,6 +1,6 @@
 extends Area2D
 
-var buttbutt = preload("res://sources/scenes/player/buttbutt.tscn")
+var buttbutt = preload("res://sources/scripts/player/buttbutt.gd")
 
 func _ready():
 	connect("area_enter", self, "on_area_enter")
