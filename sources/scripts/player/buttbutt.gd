@@ -250,8 +250,6 @@ func decide_fsm_falling(delta):
 func decide_fsm_climbing(delta):
 	if available_action_pressed("jump"):
 		change_state(FALLING)
-	elif is_on_ground() && (available_action_pressed("move_left") || available_action_pressed("move_right")) :
-		change_state(FALLING)
 	elif !can_climb():
 		change_state(FALLING)
 
@@ -268,9 +266,9 @@ func can_climb():
 
 func reached_top():
 	for area in interaction_area.get_overlapping_areas():
-		if area extends climb_area && area.is_on_top(interaction_area):
-			return true
-	return false
+		if area extends climb_area && !area.is_on_top(interaction_area):
+			return false
+	return true
 
 func get_fsm_name(id = -1):
 	if id == -1:

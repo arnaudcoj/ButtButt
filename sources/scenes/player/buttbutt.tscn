@@ -20,7 +20,7 @@ height = 28.0
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 21, 34 )
+extents = Vector2( 7.48982, 4.6855 )
 
 [node name="buttbutt" type="KinematicBody2D"]
 
@@ -32,7 +32,7 @@ collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
-debug = true
+debug = false
 control_1 = "move_right"
 control_2 = "move_left"
 

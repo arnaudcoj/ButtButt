@@ -47,6 +47,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
 
+visibility/visible = false
 transform/pos = Vector2( 0, -32 )
 shape = SubResource( 2 )
 trigger = false
