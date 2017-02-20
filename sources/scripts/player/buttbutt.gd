@@ -20,6 +20,10 @@ export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump")
 var control_1_pressed = false
 var control_2_pressed = false
 
+# keep finger id for touchscreen
+var touchscreen_right = -1
+var touchscreen_left = -1
+
 ## FSM
 
 const IDLE = 0
@@ -290,7 +294,34 @@ func get_fsm_name(id = -1):
 
 func update_controls(event):
 	# update control_x_pressed state
-	if event.type == InputEvent.KEY && !event.is_echo():
+	
+	# touchscreen event
+	if event.type == InputEvent.SCREEN_TOUCH:       
+		# just pressed the screen
+		if event.pressed:
+			# checks if bottom part of the screen
+			if event.pos.y > 200:
+				# checks if left part of the screen and no finger already in this part
+				if event.pos.x <= 1024 / 2 && touchscreen_left == -1:
+					touchscreen_left = event.index
+					control_1_pressed = true
+				# checks if right part of the screen and no finger already in this part
+				elif event.pos.x > 1024 / 2 && touchscreen_right == -1:
+					touchscreen_right = event.index
+					control_2_pressed = true
+		# just released a finger
+		else:
+			# if the finger released was on the right part
+			if event.index == touchscreen_right:
+				touchscreen_right = -1
+				control_2_pressed = false
+			# if the finger released was on the left part
+			elif event.index == touchscreen_left:
+				touchscreen_left = -1
+				control_1_pressed = false
+		
+	# Keyboard event
+	elif event.type == InputEvent.KEY && !event.is_echo():
 		if event.is_action(control_1):
 			control_1_pressed = event.pressed
 		if event.is_action(control_2):
