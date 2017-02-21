@@ -57,7 +57,6 @@ onready var initial_pos = get_pos()
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
-	print(get_pos(), " start")
 
 func reset():
 	set_pos(initial_pos)
