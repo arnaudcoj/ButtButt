@@ -11,18 +11,21 @@ func _ready():
 	# Initialization here
 	pass
 
-func _on_menu_requested():
-	emit_signal("menu")
-
-func _on_pause_requested():
-	buttbutt.release_controls()
-
-func _on_restart_requested():
-	emit_signal("restart")
-
 func _on_buttbutt_die():
 	emit_signal("restart")
 
 func _on_buttbutt_exit():
 	print("TODO next level when exit")
 	emit_signal("menu")
+
+
+func _on_menu_screen_pause():
+	pass#buttbutt.release_controls()
+
+
+func _on_menu_screen_menu():
+	emit_signal("menu")
+
+
+func _on_menu_screen_restart():
+	emit_signal("restart")

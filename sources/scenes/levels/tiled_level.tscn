@@ -214,10 +214,10 @@ transform/pos = Vector2( 1992, 452 )
 
 [connection signal="controls_changed" from="tilemaps/objects/buttbutt" to="controls_hud" method="_on_buttbutt_controls_changed"]
 
-[connection signal="menu" from="menu_screen" to="." method="_on_menu_requested"]
+[connection signal="menu" from="menu_screen" to="." method="_on_menu_screen_menu"]
 
-[connection signal="pause" from="menu_screen" to="." method="_on_pause_requested"]
+[connection signal="pause" from="menu_screen" to="." method="_on_menu_screen_pause"]
 
-[connection signal="restart" from="menu_screen" to="." method="_on_restart_requested"]
+[connection signal="restart" from="menu_screen" to="." method="_on_menu_screen_restart"]
 
 

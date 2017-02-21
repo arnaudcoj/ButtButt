@@ -276,4 +276,10 @@ transform/scale = Vector2( 47.1875, 2.0625 )
 
 [connection signal="exit" from="buttbutt" to="." method="_on_buttbutt_exit"]
 
+[connection signal="menu" from="menu_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="pause" from="menu_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="menu_screen" to="." method="_on_menu_screen_restart"]
+
 
