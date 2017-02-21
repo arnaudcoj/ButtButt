@@ -326,6 +326,10 @@ func update_controls(event):
 			control_1_pressed = event.pressed
 		if event.is_action(control_2):
 			control_2_pressed = event.pressed
+		if event.is_action("ui_page_up"):
+			control_1_pressed = event.pressed
+		if event.is_action("ui_page_down"):
+			control_2_pressed = event.pressed
 	
 func available_action_pressed(action):
 	if debug:
