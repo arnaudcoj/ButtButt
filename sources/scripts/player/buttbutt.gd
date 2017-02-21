@@ -38,10 +38,10 @@ var fsm = IDLE
 ## PHYSICS
 
 const GRAVITY = 1200
-const WALK_SPEED = 200
+const WALK_SPEED = 180
 const RUN_SPEED = 350
-const JUMP_SPEED = 70
-const CLIMB_SPEED = Vector2(70, 130)
+const JUMP_SPEED = 80
+const CLIMB_SPEED = Vector2(120, 200)
 
 var velocity = Vector2(0, 0)
 
@@ -346,11 +346,11 @@ func available_action_pressed(action):
 
 func change_controls(control_1, control_2):
 	if self.control_1 != control_1:
-		self.control_1 = control_1
 		control_1_pressed = false
+		self.control_1 = control_1
 	if self.control_2 != control_2:
-		self.control_2 = control_2
 		control_2_pressed = false
+		self.control_2 = control_2
 	emit_signal("controls_changed", self)
 
 func release_controls():
