@@ -45,7 +45,7 @@ const CLIMB_SPEED = Vector2(70, 130)
 
 var velocity = Vector2()
 
-const MAX_JUMP_TIME = 0.1
+const MAX_JUMP_TIME = 0.11
 var jumping_time = 0
 
 #### ONREADY ####
@@ -346,10 +346,12 @@ func change_controls(control_1, control_2):
 		control_2_pressed = false
 	emit_signal("controls_changed", self)
 
+func release_controls():
+	control_1_pressed = false
+	control_2_pressed = false
+
 func die():
 	emit_signal("die")
-	#get_tree().get_root().get_node("root").restart()
 	
 func exit():
 	emit_signal("exit")
-	#get_tree().get_root().get_node("root").show_menu()

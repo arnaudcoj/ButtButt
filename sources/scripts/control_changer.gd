@@ -21,15 +21,8 @@ func _ready():
 func on_area_enter(area):
 	if area.get_parent() extends buttbutt:
 		area.get_parent().change_controls(control_1, control_2)
-		
-	print("TODO control_changers to reimplement with signals")
-	pass
-	if area.get_parent().has_node("behaviour"):
-		var behaviour = area.get_parent().get_node("behaviour")
-		if behaviour.has_method("change_controls"):
-			behaviour.change_controls(control_1, control_2)
-			particles.set_emitting(true)
-			
+		particles.set_emitting(true)
+
 func update_sprites():
 	update_sprite(control_1, sprite_c1)
 	update_sprite(control_2, sprite_c2)
