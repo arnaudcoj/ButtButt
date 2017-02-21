@@ -14,7 +14,7 @@
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 18.0
+radius = 24.4069
 height = 28.0
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -26,7 +26,7 @@ extents = Vector2( 7.48982, 4.6855 )
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -38,23 +38,29 @@ control_2 = "move_left"
 
 [node name="skeleton" type="Node2D" parent="."]
 
+transform/scale = Vector2( 1.25, 1.25 )
+
 [node name="arm_r" type="Sprite" parent="skeleton"]
 
+transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="leg_r" type="Sprite" parent="skeleton"]
 
+transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="ear_r" type="Sprite" parent="skeleton"]
 
+transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 4 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="trunc" type="Sprite" parent="skeleton"]
 
+transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 5 )
 __meta__ = { "_edit_lock_":true }
 
@@ -97,7 +103,6 @@ remote_path = NodePath("../../leg_r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( 0, 1 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -106,7 +111,7 @@ _update_shape_index = 0
 
 input/pickable = true
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 12 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 22 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -115,7 +120,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
 
-transform/pos = Vector2( 0, 12 )
+transform/pos = Vector2( 0, 22 )
 shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0

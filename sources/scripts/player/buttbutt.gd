@@ -10,7 +10,7 @@ signal controls_changed
 ## Export
 
 # traces the fsm changes
-export (bool) var debug = true
+export (bool) var debug = false
 
 # default moves available
 export(String, "move_up", "move_down", "move_left", "move_right", "run", "jump") var control_1 = "move_right"
@@ -37,13 +37,13 @@ var fsm = IDLE
 
 ## PHYSICS
 
-const GRAVITY = 800
-const WALK_SPEED = 150
+const GRAVITY = 1200
+const WALK_SPEED = 200
 const RUN_SPEED = 350
 const JUMP_SPEED = 70
 const CLIMB_SPEED = Vector2(70, 130)
 
-var velocity = Vector2()
+var velocity = Vector2(0, 0)
 
 const MAX_JUMP_TIME = 0.11
 var jumping_time = 0
@@ -52,17 +52,24 @@ var jumping_time = 0
 
 onready var interaction_area = get_node("interaction_area")
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
+onready var initial_pos = get_pos()
 
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
+	print(get_pos(), " start")
+
+func reset():
+	set_pos(initial_pos)
+	velocity = Vector2(0,0)
+	fsm = IDLE
 
 #### METHODS ####
 	
 func _fixed_process(delta):
 	decide_fsm(delta)
 	update_physics(delta)
-	
+
 func _input(event):
 	update_controls(event)
 	

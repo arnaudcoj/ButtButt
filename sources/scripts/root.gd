@@ -34,9 +34,9 @@ func show_menu():
 
 func restart():
 	get_tree().set_pause(false)
+	queue.queue_resource(first_level)
 	for child in level.get_children():
 		child.queue_free()
-		queue.queue_resource(first_level)
 	load_level()
 
 func load_level():

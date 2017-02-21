@@ -123,11 +123,11 @@ __meta__ = { "_edit_lock_":true }
 
 [node name="buttbutt" parent="tilemaps/objects" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 170, 510 )
+transform/pos = Vector2( 176, 510 )
 
 [node name="Camera2D" type="Camera2D" parent="tilemaps/objects/buttbutt"]
 
-transform/pos = Vector2( 2, -8 )
+transform/pos = Vector2( -1, 0 )
 anchor_mode = 1
 rotating = false
 current = true
