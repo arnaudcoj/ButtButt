@@ -39,18 +39,19 @@ var fsm = IDLE
 const LEFT = 0
 const RIGHT = 1
 var direction = LEFT
+
 ## PHYSICS
 
 const GRAVITY = 1200
 const WALK_SPEED = 180
 const RUN_SPEED = 350
-const JUMP_SPEED = 80
+const JUMP_SPEED = 50
 const CLIMB_SPEED = Vector2(120, 200)
 
 var velocity = Vector2(0, 0)
 
 # Jump Duration
-const MAX_JUMP_TIME = 0.11
+const MAX_JUMP_TIME = 0.2
 var jumping_time = 0
 
 # Delay to jump after leaving the ground (feels better)
@@ -62,11 +63,14 @@ var time_off_ground = 0
 onready var interaction_area = get_node("interaction_area")
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
 onready var initial_pos = get_pos()
+onready var animations = get_node("animations")
 onready var animations_tree = get_node("animations_tree")
 
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
+	var jump_animation_time = MAX_JUMP_TIME / animations.get_animation("jump").get_length()
+	animations_tree.timescale_node_set_scale("jump_speed", jump_animation_time)
 	animations_tree.set_active(true)
 	set_scale(Vector2(-abs(get_scale().x), get_scale().y))
 
@@ -339,7 +343,7 @@ func update_animations(delta):
 	animations_tree.timescale_node_set_scale("climbing_speed", max(horizontal_speed, vertical_speed))
 	
 	# special case when climbing
-	if fsm == 5:
+	if fsm == CLIMBING:
 		animations_tree.transition_node_set_current("fsm_climb", 1)
 	else:
 		animations_tree.transition_node_set_current("fsm_climb", 0)

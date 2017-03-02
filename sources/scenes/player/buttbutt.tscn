@@ -687,7 +687,7 @@ tracks/31/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "upda
 [sub_resource type="Animation" id=8]
 
 length = 0.5
-loop = true
+loop = false
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("skeleton_front/butt/remote_leg_r:transform/scale")
@@ -698,7 +698,7 @@ tracks/1/type = "value"
 tracks/1/path = NodePath("skeleton_front/butt/remote_leg_r:transform/rot")
 tracks/1/interp = 1
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0, 0.1, 0.4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 0.0, -12.267, 0.0 ] }
+tracks/1/keys = { "times":FloatArray( 0.1, 0.4 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ -12.267, 0.0 ] }
 tracks/2/type = "value"
 tracks/2/path = NodePath("skeleton_front/butt/remote_leg_r:transform/pos")
 tracks/2/interp = 1
@@ -713,7 +713,7 @@ tracks/4/type = "value"
 tracks/4/path = NodePath("skeleton_front/butt/leg_l:transform/rot")
 tracks/4/interp = 1
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0, 0.1, 0.4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 0.0, 13.3782, 0.0 ] }
+tracks/4/keys = { "times":FloatArray( 0.1, 0.4 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 13.3782, 0.0 ] }
 tracks/5/type = "value"
 tracks/5/path = NodePath("skeleton_front/butt/leg_l:transform/pos")
 tracks/5/interp = 1
@@ -728,7 +728,7 @@ tracks/7/type = "value"
 tracks/7/path = NodePath("skeleton_front/butt/remote_trunc/remote_ear_r:transform/rot")
 tracks/7/interp = 1
 tracks/7/imported = false
-tracks/7/keys = { "times":FloatArray( 0, 0.1, 0.4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 0.0, 9.22924, -8.6184 ] }
+tracks/7/keys = { "times":FloatArray( 0.1, 0.4 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 9.22924, -8.6184 ] }
 tracks/8/type = "value"
 tracks/8/path = NodePath("skeleton_front/butt/remote_trunc/remote_ear_r:transform/pos")
 tracks/8/interp = 1
@@ -773,7 +773,7 @@ tracks/16/type = "value"
 tracks/16/path = NodePath("skeleton_front/butt/remote_trunc/ear_l:transform/rot")
 tracks/16/interp = 1
 tracks/16/imported = false
-tracks/16/keys = { "times":FloatArray( 0, 0.1, 0.4 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 0.0, -15.0118, 6.56225 ] }
+tracks/16/keys = { "times":FloatArray( 0.1, 0.4 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ -15.0118, 6.56225 ] }
 tracks/17/type = "value"
 tracks/17/path = NodePath("skeleton_front/butt/remote_trunc/ear_l:transform/pos")
 tracks/17/interp = 1
@@ -1067,11 +1067,13 @@ control_2 = "move_left"
 [node name="skeleton_front" type="Node2D" parent="."]
 
 editor/display_folded = true
-transform/scale = Vector2( 1.25, 1.25 )
+transform/pos = Vector2( 2.38419e-006, 17.3228 )
+transform/scale = Vector2( 1.6875, 0.666337 )
 
 [node name="arm_r" type="Sprite" parent="skeleton_front"]
 
 transform/pos = Vector2( -12, 0 )
+transform/rot = -10.0
 transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 offset = Vector2( 12, 0 )
@@ -1080,6 +1082,7 @@ __meta__ = { "_edit_lock_":true }
 [node name="leg_r" type="Sprite" parent="skeleton_front"]
 
 transform/pos = Vector2( -4, 12 )
+transform/rot = -12.267
 transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 offset = Vector2( 4, -12 )
@@ -1088,6 +1091,7 @@ __meta__ = { "_edit_lock_":true }
 [node name="ear_r" type="Sprite" parent="skeleton_front"]
 
 transform/pos = Vector2( 4, -12 )
+transform/rot = 9.22924
 transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 4 )
 offset = Vector2( -4, 12 )
@@ -1119,34 +1123,40 @@ offset = Vector2( -4, 16 )
 [node name="ear_l" type="Sprite" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( 0, -16 )
+transform/rot = -15.0118
 texture = ExtResource( 8 )
 offset = Vector2( -2.27725, 11.4688 )
 
 [node name="arm_l" type="Sprite" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( -4, -12 )
+transform/rot = 8.0
 texture = ExtResource( 9 )
 offset = Vector2( 4, 8 )
 
 [node name="remote_arm_r" type="RemoteTransform2D" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( -12, -4 )
+transform/rot = -10.0
 remote_path = NodePath("../../../arm_r")
 
 [node name="remote_ear_r" type="RemoteTransform2D" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( 4, -16 )
+transform/rot = 9.22924
 remote_path = NodePath("../../../ear_r")
 
 [node name="leg_l" type="Sprite" parent="skeleton_front/butt"]
 
 transform/pos = Vector2( 4, 12 )
+transform/rot = 13.3782
 texture = ExtResource( 10 )
 offset = Vector2( -4, -12 )
 
 [node name="remote_leg_r" type="RemoteTransform2D" parent="skeleton_front/butt"]
 
 transform/pos = Vector2( -4, 12 )
+transform/rot = -12.267
 remote_path = NodePath("../../leg_r")
 
 [node name="skeleton_back" type="Node2D" parent="."]
@@ -1309,6 +1319,6 @@ autoplay = ""
 playback/process_mode = 1
 base_path = NodePath("..")
 master_player = NodePath("../animations")
-data = { "active":false, "connections":[ "fsm_climb", "out", 0, "anim", "fsm", 0, "walk_speed", "fsm", 1, "run_speed", "fsm", 2, "anim 3", "fsm", 3, "falling_speed", "fsm", 4, "anim 2", "walk_speed", 0, "anim 6", "run_speed", 0, "anim 4", "falling_speed", 0, "anim 5", "climbing_speed", 0, "fsm", "fsm_climb", 0, "climbing_speed", "fsm_climb", 1 ], "master":NodePath("../animations"), "nodes":[ { "filter":[  ], "from":"idle", "id":"anim", "pos":Vector2( 232, 61 ), "type":"animation" }, { "id":"out", "pos":Vector2( 819, 437 ), "type":"output" }, { "id":"fsm", "pos":Vector2( 448, 293 ), "transitions":[ { "auto_advance":false }, { "auto_advance":false }, { "auto_advance":false }, { "auto_advance":false }, { "auto_advance":false } ], "type":"transition", "xfade":0.15 }, { "id":"walk_speed", "pos":Vector2( 236, 156 ), "scale":1.0, "type":"timescale" }, { "filter":[  ], "from":"falling", "id":"anim 4", "pos":Vector2( 42, 434 ), "type":"animation" }, { "filter":[  ], "from":"walking", "id":"anim 6", "pos":Vector2( 33, 247 ), "type":"animation" }, { "filter":[  ], "from":"climbing", "id":"anim 5", "pos":Vector2( 41, 525 ), "type":"animation" }, { "filter":[  ], "from":"jump", "id":"anim 3", "pos":Vector2( 34, 341 ), "type":"animation" }, { "filter":[  ], "from":"walking", "id":"anim 2", "pos":Vector2( 35, 157 ), "type":"animation" }, { "id":"run_speed", "pos":Vector2( 240, 251 ), "scale":1.0, "type":"timescale" }, { "id":"falling_speed", "pos":Vector2( 175, 433 ), "scale":1.0, "type":"timescale" }, { "id":"climbing_speed", "pos":Vector2( 169, 528 ), "scale":1.0, "type":"timescale" }, { "id":"fsm_climb", "pos":Vector2( 650, 477 ), "transitions":[ { "auto_advance":false }, { "auto_advance":false } ], "type":"transition", "xfade":0.0 } ] }
+data = { "active":false, "connections":[ "fsm_climb", "out", 0, "anim", "fsm", 0, "walk_speed", "fsm", 1, "run_speed", "fsm", 2, "jump_speed", "fsm", 3, "falling_speed", "fsm", 4, "anim 2", "walk_speed", 0, "anim 6", "run_speed", 0, "anim 4", "falling_speed", 0, "anim 5", "climbing_speed", 0, "fsm", "fsm_climb", 0, "climbing_speed", "fsm_climb", 1, "anim 3", "jump_speed", 0 ], "master":NodePath("../animations"), "nodes":[ { "filter":[  ], "from":"idle", "id":"anim", "pos":Vector2( 232, 61 ), "type":"animation" }, { "id":"out", "pos":Vector2( 819, 437 ), "type":"output" }, { "id":"fsm", "pos":Vector2( 448, 293 ), "transitions":[ { "auto_advance":false }, { "auto_advance":false }, { "auto_advance":false }, { "auto_advance":false }, { "auto_advance":false } ], "type":"transition", "xfade":0.15 }, { "id":"walk_speed", "pos":Vector2( 236, 156 ), "scale":1.0, "type":"timescale" }, { "filter":[  ], "from":"falling", "id":"anim 4", "pos":Vector2( 42, 434 ), "type":"animation" }, { "filter":[  ], "from":"walking", "id":"anim 6", "pos":Vector2( 33, 247 ), "type":"animation" }, { "filter":[  ], "from":"climbing", "id":"anim 5", "pos":Vector2( 41, 525 ), "type":"animation" }, { "filter":[  ], "from":"jump", "id":"anim 3", "pos":Vector2( 34, 341 ), "type":"animation" }, { "filter":[  ], "from":"walking", "id":"anim 2", "pos":Vector2( 35, 157 ), "type":"animation" }, { "id":"run_speed", "pos":Vector2( 240, 251 ), "scale":1.0, "type":"timescale" }, { "id":"falling_speed", "pos":Vector2( 231, 433 ), "scale":1.0, "type":"timescale" }, { "id":"climbing_speed", "pos":Vector2( 222, 526 ), "scale":1.0, "type":"timescale" }, { "id":"fsm_climb", "pos":Vector2( 650, 477 ), "transitions":[ { "auto_advance":false }, { "auto_advance":false } ], "type":"transition", "xfade":0.0 }, { "id":"jump_speed", "pos":Vector2( 237, 341 ), "scale":1.0, "type":"timescale" } ] }
 
 
