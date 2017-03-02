@@ -1159,7 +1159,6 @@ transform/scale = Vector2( 1.25, 1.25 )
 
 transform/pos = Vector2( -7.99868, 1.45481 )
 transform/rot = 8.5085
-transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 11 )
 offset = Vector2( 8, 0 )
 
@@ -1167,6 +1166,7 @@ offset = Vector2( 8, 0 )
 
 transform/pos = Vector2( 9.59842, 1.77422 )
 transform/rot = 58.5085
+transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 12 )
 offset = Vector2( -9.60001, 1.43051e-006 )
 
@@ -1174,13 +1174,14 @@ offset = Vector2( -9.60001, 1.43051e-006 )
 
 transform/pos = Vector2( -1.30937, -14.4264 )
 transform/rot = 2.26875
+transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 13 )
 offset = Vector2( 1.6, 16 )
 
 [node name="ear_r" type="Sprite" parent="skeleton_back"]
 
 transform/pos = Vector2( 1.89011, -14.3683 )
-transform/rot = -0.425581
+transform/rot = -0.425578
 texture = ExtResource( 14 )
 offset = Vector2( -1.6, 16 )
 

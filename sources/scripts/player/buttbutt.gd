@@ -49,8 +49,13 @@ const CLIMB_SPEED = Vector2(120, 200)
 
 var velocity = Vector2(0, 0)
 
+# Jump Duration
 const MAX_JUMP_TIME = 0.11
 var jumping_time = 0
+
+# Delay to jump after leaving the ground (feels better)
+const JUMP_DELAY = 0.3
+var time_off_ground = 0
 
 #### ONREADY ####
 
@@ -87,6 +92,8 @@ func update_physics(delta):
 	# first update the velocity with gravity
 	update_gravity(delta)
 	
+	update_jump_delay(delta)
+	
 	# next update the velocity according to the fsm state
 	if fsm == IDLE:
 		update_idle(delta)
@@ -104,6 +111,11 @@ func update_physics(delta):
 	# finally integrate the velocity into actual motion
 	integrate_motion(delta)
 	
+func update_jump_delay(delta):
+	if fsm == FALLING || fsm == JUMPING:
+		time_off_ground += delta
+	elif time_off_ground > 0:
+		time_off_ground = 0
 	
 func update_idle(delta):
 	velocity.y = 0
@@ -252,16 +264,20 @@ func decide_fsm_running(delta):
 func decide_fsm_jumping(delta):
 	if jumping_time > MAX_JUMP_TIME || !available_action_pressed("jump"):
 		change_state(FALLING)
-		reset_jump()
-		
+	
 func decide_fsm_falling(delta):
 	if is_on_ground():
 		if available_action_pressed("move_left") || available_action_pressed("move_right"):
 			change_state(WALKING)
+			reset_jump()
 		else :
 			change_state(IDLE)
+			reset_jump()
+	elif time_off_ground < JUMP_DELAY && jumping_time == 0 && available_action_pressed("jump"):
+		change_state(JUMPING)
 	elif can_climb() && !reached_top() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
 		change_state(CLIMBING)
+		reset_jump()
 		
 func decide_fsm_climbing(delta):
 	if available_action_pressed("jump"):
@@ -317,7 +333,7 @@ func update_animations(delta):
 			set_scale(Vector2(-abs(get_scale().x), get_scale().y))
 	
 	# set the animationTree values
-	animations_tree.timescale_node_set_scale("walk_speed", horizontal_speed)
+	animations_tree.timescale_node_set_scale("walk_speed", horizontal_speed * 1.2)
 	animations_tree.timescale_node_set_scale("run_speed", horizontal_speed * 1.2)
 	animations_tree.timescale_node_set_scale("falling_speed", vertical_speed)
 	animations_tree.timescale_node_set_scale("climbing_speed", max(horizontal_speed, vertical_speed))
