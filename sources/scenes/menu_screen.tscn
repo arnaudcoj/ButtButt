@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=1]
 
-[ext_resource path="res://sources/scripts/menu_screen.gd" type="Script" id=1]
+[ext_resource path="res://sources/scripts/in_game_menu.gd" type="Script" id=1]
 [ext_resource path="res://sources/scripts/title_animation_changer.gd" type="Script" id=2]
 [ext_resource path="res://sources/assets/fonts/cartwheel_80.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://sources/assets/fonts/cartwheel_40.fnt" type="BitmapFont" id=4]
@@ -157,6 +157,11 @@ tracks/14/path = NodePath("pause_button/pause_sprite:visibility/opacity")
 tracks/14/interp = 1
 tracks/14/imported = false
 tracks/14/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 1.0 ] }
+tracks/15/type = "value"
+tracks/15/path = NodePath("menu_screen:visibility/visible")
+tracks/15/interp = 1
+tracks/15/imported = false
+tracks/15/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ true ] }
 
 [sub_resource type="Animation" id=3]
 
@@ -214,6 +219,7 @@ autoplay = "start"
 
 [node name="menu_screen" type="Polygon2D" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 60, 10 )
 polygon = Vector2Array( 68, 90, 836, 90, 836, 490, 68, 490 )
 uv = Vector2Array(  )
@@ -372,8 +378,6 @@ transform/pos = Vector2( 51.2, 40 )
 transform/scale = Vector2( 6.4, 3.33333 )
 texture = ExtResource( 8 )
 centered = false
-
-[connection signal="finished" from="animation" to="." method="_on_animation_finished"]
 
 [connection signal="finished" from="menu_screen/animation" to="menu_screen" method="_on_animation_finished"]
 

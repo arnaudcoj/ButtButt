@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://sources/scripts/levels/level.gd" type="Script" id=1]
 [ext_resource path="res://sources/scenes/levels/climb_area.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://sources/scenes/controls_hud.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sources/scenes/menu_screen.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sources/scenes/levels/death_zone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sources/scenes/game_over.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -270,6 +271,13 @@ drag_margin/bottom = 0.2
 transform/pos = Vector2( 521, 691 )
 transform/scale = Vector2( 47.1875, 2.0625 )
 
+[node name="death_zone2" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 541.461, 240.749 )
+transform/scale = Vector2( 0.676126, 2.0625 )
+
+[node name="game_over_screen" parent="." instance=ExtResource( 10 )]
+
 [connection signal="controls_changed" from="buttbutt" to="controls_hud" method="_on_buttbutt_controls_changed"]
 
 [connection signal="die" from="buttbutt" to="." method="_on_buttbutt_die"]
@@ -281,5 +289,11 @@ transform/scale = Vector2( 47.1875, 2.0625 )
 [connection signal="pause" from="menu_screen" to="." method="_on_menu_screen_pause"]
 
 [connection signal="restart" from="menu_screen" to="." method="_on_menu_screen_restart"]
+
+[connection signal="menu" from="game_over_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="pause" from="game_over_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="game_over_screen" to="." method="_on_menu_screen_restart"]
 
 
