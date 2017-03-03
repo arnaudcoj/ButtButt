@@ -19,74 +19,74 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("menu_screen:transform/pos")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, -4 ), "update":0, "values":[ Vector2( 14.0297, 4.56818 ), Vector2( 60, 10 ) ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -2.07053, -2.07053 ), "update":0, "values":[ Vector2( 29.0297, 21.5682 ), Vector2( 60, 10 ) ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("menu_screen:transform/rot")
 tracks/1/interp = 1
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -4, -4 ), "update":0, "values":[ 0.0, 0.0 ] }
+tracks/1/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -2.07053, -2.07053 ), "update":0, "values":[ 0.0, 0.0 ] }
 tracks/2/type = "value"
 tracks/2/path = NodePath("menu_screen:transform/scale")
 tracks/2/interp = 1
 tracks/2/imported = false
-tracks/2/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -4, -4 ), "update":0, "values":[ Vector2( 0.0618812, 0.120455 ), Vector2( 1, 1 ) ] }
+tracks/2/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -2.07053, -2.07053 ), "update":0, "values":[ Vector2( 0.0618812, 0.120455 ), Vector2( 1, 1 ) ] }
 tracks/3/type = "value"
 tracks/3/path = NodePath("menu_screen/title/Label:visibility/self_opacity")
 tracks/3/interp = 1
 tracks/3/imported = false
-tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -4 ), "update":0, "values":[ 1.0 ] }
+tracks/3/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -2.07053 ), "update":0, "values":[ 1.0 ] }
 tracks/4/type = "value"
 tracks/4/path = NodePath("menu_screen/title:transform/pos")
 tracks/4/interp = 1
 tracks/4/imported = false
-tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 452, 142 ) ] }
+tracks/4/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -2.07053 ), "update":0, "values":[ Vector2( 452, 142 ) ] }
 tracks/5/type = "value"
 tracks/5/path = NodePath("menu_screen/title:transform/rot")
 tracks/5/interp = 1
 tracks/5/imported = false
-tracks/5/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -4 ), "update":0, "values":[ 0.0 ] }
+tracks/5/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -2.07053 ), "update":0, "values":[ 0.0 ] }
 tracks/6/type = "value"
 tracks/6/path = NodePath("menu_screen/title:transform/scale")
 tracks/6/interp = 1
 tracks/6/imported = false
-tracks/6/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -4 ), "update":0, "values":[ Vector2( 1, 1 ) ] }
+tracks/6/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -2.07053 ), "update":0, "values":[ Vector2( 1, 1 ) ] }
 tracks/7/type = "value"
 tracks/7/path = NodePath("menu_screen:visibility/opacity")
 tracks/7/interp = 1
 tracks/7/imported = false
-tracks/7/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -4, -1.8025 ), "update":0, "values":[ 0.0, 1.0 ] }
+tracks/7/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -2.07053, -2.07053 ), "update":0, "values":[ 0.0, 1.0 ] }
 tracks/8/type = "value"
 tracks/8/path = NodePath("menu_screen:color")
 tracks/8/interp = 1
 tracks/8/imported = false
-tracks/8/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, -4 ), "update":0, "values":[ Color( 0.871216, 0.88494, 0.914063, 0.114745 ), Color( 0.376648, 0.558798, 0.945313, 1 ) ] }
+tracks/8/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -2.07053, -2.07053 ), "update":0, "values":[ Color( 0.871216, 0.88494, 0.914063, 0.114745 ), Color( 0.376648, 0.558798, 0.945313, 1 ) ] }
 tracks/9/type = "value"
-tracks/9/path = NodePath("pause_button:transform/scale")
+tracks/9/path = NodePath("pause_button/pause_sprite:transform/pos")
 tracks/9/interp = 1
 tracks/9/imported = false
-tracks/9/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -4, -4 ), "update":0, "values":[ Vector2( 1, 1 ), Vector2( 16, 8.33333 ) ] }
+tracks/9/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -2.07053, -2.07053 ), "update":0, "values":[ Vector2( 13.2, 12.8 ), Vector2( 51.2, 40 ) ] }
 tracks/10/type = "value"
-tracks/10/path = NodePath("pause_button:transform/pos")
+tracks/10/path = NodePath("pause_button/pause_sprite:transform/scale")
 tracks/10/interp = 1
 tracks/10/imported = false
-tracks/10/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, -4 ), "update":0, "values":[ Vector2( 18, 15 ), Vector2( 128, 100 ) ] }
+tracks/10/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( -2.07053, -2.07053 ), "update":0, "values":[ Vector2( 0.4, 0.4 ), Vector2( 6.4, 3.33333 ) ] }
 tracks/11/type = "value"
-tracks/11/path = NodePath("pause_button:visibility/opacity")
+tracks/11/path = NodePath("pause_button/pause_sprite:visibility/opacity")
 tracks/11/interp = 1
 tracks/11/imported = false
-tracks/11/keys = { "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 0.25, 0.554785 ), "update":0, "values":[ 1.0, 0.0 ] }
+tracks/11/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 0.217638, 0.217638 ), "update":0, "values":[ 1.0, 0.0 ] }
 
 [sub_resource type="Animation" id=2]
 
 resource/name = "start"
-length = 0.5
+length = 0.01
 loop = false
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("menu_screen:transform/pos")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 14.0297, 4.56818 ) ] }
+tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 29.0297, 21.5682 ) ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("menu_screen:transform/rot")
 tracks/1/interp = 1
@@ -131,17 +131,32 @@ tracks/9/type = "value"
 tracks/9/path = NodePath("pause_button:transform/scale")
 tracks/9/interp = 1
 tracks/9/imported = false
-tracks/9/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( -4 ), "update":0, "values":[ Vector2( 1, 1 ) ] }
+tracks/9/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 2.5, 2.5 ) ] }
 tracks/10/type = "value"
 tracks/10/path = NodePath("pause_button:transform/pos")
 tracks/10/interp = 1
 tracks/10/imported = false
-tracks/10/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 18, 15 ) ] }
+tracks/10/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 5.96046e-008, 5.96046e-008 ) ] }
 tracks/11/type = "value"
 tracks/11/path = NodePath("pause_button:visibility/opacity")
 tracks/11/interp = 1
 tracks/11/imported = false
 tracks/11/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 0.25 ), "update":0, "values":[ 1.0 ] }
+tracks/12/type = "value"
+tracks/12/path = NodePath("pause_button/pause_sprite:transform/pos")
+tracks/12/interp = 1
+tracks/12/imported = false
+tracks/12/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 13.2, 12.8 ) ] }
+tracks/13/type = "value"
+tracks/13/path = NodePath("pause_button/pause_sprite:transform/scale")
+tracks/13/interp = 1
+tracks/13/imported = false
+tracks/13/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 0.4, 0.4 ) ] }
+tracks/14/type = "value"
+tracks/14/path = NodePath("pause_button/pause_sprite:visibility/opacity")
+tracks/14/interp = 1
+tracks/14/imported = false
+tracks/14/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ 1.0 ] }
 
 [sub_resource type="Animation" id=3]
 
@@ -192,7 +207,6 @@ playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/open = SubResource( 1 )
 anims/start = SubResource( 2 )
-next/start = ""
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -200,12 +214,10 @@ autoplay = "start"
 
 [node name="menu_screen" type="Polygon2D" parent="."]
 
-visibility/opacity = 0.0
-transform/pos = Vector2( 14.0297, 4.56818 )
-transform/scale = Vector2( 0.0618812, 0.120455 )
+transform/pos = Vector2( 60, 10 )
 polygon = Vector2Array( 68, 90, 836, 90, 836, 490, 68, 490 )
 uv = Vector2Array(  )
-color = Color( 0.871216, 0.88494, 0.914063, 0.114745 )
+color = Color( 0.376648, 0.558798, 0.945313, 1 )
 vertex_colors = ColorArray(  )
 offset = Vector2( 0, 0 )
 texture/texture = null
@@ -225,9 +237,6 @@ root/root = NodePath("..")
 anims/title_random_1 = SubResource( 3 )
 anims/title_random_2 = SubResource( 4 )
 anims/title_random_3 = SubResource( 5 )
-next/title_random_1 = ""
-next/title_random_2 = ""
-next/title_random_3 = ""
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -346,14 +355,23 @@ flat = false
 
 [node name="pause_button" type="TouchScreenButton" parent="."]
 
-transform/pos = Vector2( 18, 15 )
+visibility/self_opacity = 0.0
+transform/pos = Vector2( 5.96046e-008, 5.96046e-008 )
+transform/scale = Vector2( 2.5, 2.5 )
 normal = ExtResource( 8 )
 pressed = null
 bitmask = null
 passby_press = false
 action = ""
 visibility_mode = 1
-__meta__ = { "_edit_lock_":true }
+
+[node name="pause_sprite" type="Sprite" parent="pause_button"]
+
+visibility/opacity = 0.0
+transform/pos = Vector2( 51.2, 40 )
+transform/scale = Vector2( 6.4, 3.33333 )
+texture = ExtResource( 8 )
+centered = false
 
 [connection signal="finished" from="animation" to="." method="_on_animation_finished"]
 
