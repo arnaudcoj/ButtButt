@@ -3,6 +3,7 @@ extends CanvasLayer
 signal pause
 signal restart
 signal menu
+signal next
 
 var enabled = true
 var open = false
@@ -45,3 +46,7 @@ func _on_resume_button_pressed():
 func _on_menu_button_pressed():
 	if open:
 		emit_signal("menu")
+
+func _on_next_button_pressed():
+	if open:
+		emit_signal("next")

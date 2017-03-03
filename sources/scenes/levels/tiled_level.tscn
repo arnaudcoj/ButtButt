@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://sources/scripts/levels/level.gd" type="Script" id=1]
 [ext_resource path="res://sources/scenes/controls_hud.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://sources/scenes/exit.tscn" type="PackedScene" id=9]
 [ext_resource path="res://sources/scenes/menu_screen.tscn" type="PackedScene" id=10]
 [ext_resource path="res://sources/scenes/game_over.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sources/scenes/success.tscn" type="PackedScene" id=12]
 
 [node name="tiled_level" type="Node"]
 
@@ -163,7 +164,7 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( 393241, 34, 458755, 36, 458767, 26, 458769, 26, 524295, 76, 524296, 95, 524297, 95, 524298, 95, 524299, 82, 524303, 9, 524304, 32, 524305, 9, 589831, 65, 589832, 93, 589833, 93, 589834, 93, 589835, 65, 589839, 9, 589840, 30, 589841, 9, 655367, 65, 655368, 93, 655369, 93, 655370, 93, 655371, 65, 655375, 9, 655376, 30, 655377, 9, 720911, 37, 720912, 37, 720913, 37 )
+tile_data = IntArray( 393241, 34, 458755, 36, 524295, 76, 524296, 95, 524297, 95, 524298, 95, 524299, 82, 524303, 9, 524304, 32, 524305, 9, 589831, 65, 589832, 93, 589833, 93, 589834, 93, 589835, 65, 589839, 9, 589840, 30, 589841, 9, 655367, 65, 655368, 93, 655369, 93, 655370, 93, 655371, 65, 655375, 9, 655376, 30, 655377, 9, 720911, 37, 720912, 37, 720913, 37 )
 __meta__ = { "_edit_lock_":true }
 
 [node name="death_zones" type="Node" parent="."]
@@ -215,6 +216,8 @@ transform/pos = Vector2( 1992, 452 )
 
 [node name="game_over_screen" parent="." instance=ExtResource( 11 )]
 
+[node name="success_screen" parent="." instance=ExtResource( 12 )]
+
 [connection signal="controls_changed" from="tilemaps/objects/buttbutt" to="controls_hud" method="_on_buttbutt_controls_changed"]
 
 [connection signal="die" from="tilemaps/objects/buttbutt" to="." method="_on_buttbutt_die"]
@@ -232,5 +235,13 @@ transform/pos = Vector2( 1992, 452 )
 [connection signal="pause" from="game_over_screen" to="." method="_on_menu_screen_pause"]
 
 [connection signal="restart" from="game_over_screen" to="." method="_on_menu_screen_restart"]
+
+[connection signal="menu" from="success_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="next" from="success_screen" to="." method="_on_menu_screen_next"]
+
+[connection signal="pause" from="success_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="success_screen" to="." method="_on_menu_screen_restart"]
 
 

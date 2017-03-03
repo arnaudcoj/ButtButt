@@ -15,6 +15,9 @@ func close():
 func _input(event):
 	if !using_keyboard && event.type == InputEvent.KEY && open:
 		if event.is_action_pressed("move_right") || event.is_action_pressed("start"):
+			buttons.get_node("next_button").grab_focus()
+			using_keyboard = true
+		elif event.is_action_pressed("move_down"):
 			buttons.get_node("restart_button").grab_focus()
 			using_keyboard = true
 		elif event.is_action_pressed("move_left"):

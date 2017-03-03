@@ -255,7 +255,7 @@ resources/pack_mode=0
 
 application/bits_mode=0
 application/copyright=""
-application/icon="res://icon.png"
+application/icon="res://sources/assets/sprites/buttbutt/trousers.png"
 application/identifier="org.godotengine.macgame"
 application/info="Made with Godot Engine"
 application/name="ButtButt"
@@ -264,7 +264,7 @@ application/signature="godotmacgame"
 application/version="1.0"
 custom_package/debug=""
 custom_package/release=""
-debug/debugging_enabled=true
+debug/debugging_enabled=false
 display/high_res=false
 
 [platform:Windows Desktop]
@@ -272,7 +272,7 @@ display/high_res=false
 binary/64_bits=false
 custom_binary/debug=""
 custom_binary/release=""
-debug/debugging_enabled=true
+debug/debugging_enabled=false
 resources/bundle_dependencies_(for_optical_disc)=false
 resources/pack_mode=0
 
