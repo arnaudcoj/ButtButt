@@ -511,7 +511,7 @@ tracks/30/type = "value"
 tracks/30/path = NodePath("skeleton_front:transform/pos")
 tracks/30/interp = 1
 tracks/30/imported = false
-tracks/30/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 3.21865e-006, -2 ) ] }
+tracks/30/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":0, "values":[ Vector2( 3.21865e-06, -2 ) ] }
 tracks/31/type = "value"
 tracks/31/path = NodePath("skeleton_back:visibility/opacity")
 tracks/31/interp = 1
@@ -642,7 +642,7 @@ tracks/23/type = "value"
 tracks/23/path = NodePath("skeleton_front/butt/remote_trunc:transform/pos")
 tracks/23/interp = 1
 tracks/23/imported = false
-tracks/23/keys = { "times":FloatArray( 0, 0.6 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 0, 4 ), Vector2( -5.48363e-006, 2.48295 ) ] }
+tracks/23/keys = { "times":FloatArray( 0, 0.6 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 0, 4 ), Vector2( -5.48363e-06, 2.48295 ) ] }
 tracks/24/type = "value"
 tracks/24/path = NodePath("skeleton_front/butt:transform/scale")
 tracks/24/interp = 1
@@ -657,7 +657,7 @@ tracks/26/type = "value"
 tracks/26/path = NodePath("skeleton_front/butt:transform/pos")
 tracks/26/interp = 1
 tracks/26/imported = false
-tracks/26/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 0, 0 ), Vector2( 3.75509e-006, -1.7 ) ] }
+tracks/26/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ Vector2( 0, 0 ), Vector2( 3.75509e-06, -1.7 ) ] }
 tracks/27/type = "value"
 tracks/27/path = NodePath("skeleton_front:transform/scale")
 tracks/27/interp = 1
@@ -838,7 +838,7 @@ tracks/29/type = "value"
 tracks/29/path = NodePath("skeleton_front:transform/pos")
 tracks/29/interp = 1
 tracks/29/imported = false
-tracks/29/keys = { "times":FloatArray( 0, 0.3 ), "transitions":FloatArray( 1, -2.54912 ), "update":0, "values":[ Vector2( 2.38419e-006, 17.3228 ), Vector2( 1.3113e-006, -4 ) ] }
+tracks/29/keys = { "times":FloatArray( 0, 0.3 ), "transitions":FloatArray( 1, -2.54912 ), "update":0, "values":[ Vector2( 2.38419e-06, 17.3228 ), Vector2( 1.3113e-06, -4 ) ] }
 tracks/30/type = "value"
 tracks/30/path = NodePath("skeleton_front:visibility/opacity")
 tracks/30/interp = 1
@@ -1038,7 +1038,7 @@ tracks/29/type = "value"
 tracks/29/path = NodePath("skeleton_front:transform/pos")
 tracks/29/interp = 1
 tracks/29/imported = false
-tracks/29/keys = { "times":FloatArray( 0.2, 0.6 ), "transitions":FloatArray( -3.03143, -3.03143 ), "update":0, "values":[ Vector2( -2.38419e-007, 4 ), Vector2( 2.5034e-006, -2 ) ] }
+tracks/29/keys = { "times":FloatArray( 0.2, 0.6 ), "transitions":FloatArray( -3.03143, -3.03143 ), "update":0, "values":[ Vector2( -2.38419e-07, 4 ), Vector2( 2.5034e-06, -2 ) ] }
 tracks/30/type = "value"
 tracks/30/path = NodePath("skeleton_back:visibility/opacity")
 tracks/30/interp = 1
@@ -1067,13 +1067,11 @@ control_2 = "move_left"
 [node name="skeleton_front" type="Node2D" parent="."]
 
 editor/display_folded = true
-transform/pos = Vector2( 2.38419e-006, 17.3228 )
-transform/scale = Vector2( 1.6875, 0.666337 )
+transform/scale = Vector2( 1.25, 1.25 )
 
 [node name="arm_r" type="Sprite" parent="skeleton_front"]
 
 transform/pos = Vector2( -12, 0 )
-transform/rot = -10.0
 transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 offset = Vector2( 12, 0 )
@@ -1082,7 +1080,6 @@ __meta__ = { "_edit_lock_":true }
 [node name="leg_r" type="Sprite" parent="skeleton_front"]
 
 transform/pos = Vector2( -4, 12 )
-transform/rot = -12.267
 transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 offset = Vector2( 4, -12 )
@@ -1091,7 +1088,6 @@ __meta__ = { "_edit_lock_":true }
 [node name="ear_r" type="Sprite" parent="skeleton_front"]
 
 transform/pos = Vector2( 4, -12 )
-transform/rot = 9.22924
 transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 4 )
 offset = Vector2( -4, 12 )
@@ -1123,40 +1119,34 @@ offset = Vector2( -4, 16 )
 [node name="ear_l" type="Sprite" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( 0, -16 )
-transform/rot = -15.0118
 texture = ExtResource( 8 )
 offset = Vector2( -2.27725, 11.4688 )
 
 [node name="arm_l" type="Sprite" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( -4, -12 )
-transform/rot = 8.0
 texture = ExtResource( 9 )
 offset = Vector2( 4, 8 )
 
 [node name="remote_arm_r" type="RemoteTransform2D" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( -12, -4 )
-transform/rot = -10.0
 remote_path = NodePath("../../../arm_r")
 
 [node name="remote_ear_r" type="RemoteTransform2D" parent="skeleton_front/butt/remote_trunc"]
 
 transform/pos = Vector2( 4, -16 )
-transform/rot = 9.22924
 remote_path = NodePath("../../../ear_r")
 
 [node name="leg_l" type="Sprite" parent="skeleton_front/butt"]
 
 transform/pos = Vector2( 4, 12 )
-transform/rot = 13.3782
 texture = ExtResource( 10 )
 offset = Vector2( -4, -12 )
 
 [node name="remote_leg_r" type="RemoteTransform2D" parent="skeleton_front/butt"]
 
 transform/pos = Vector2( -4, 12 )
-transform/rot = -12.267
 remote_path = NodePath("../../leg_r")
 
 [node name="skeleton_back" type="Node2D" parent="."]
@@ -1178,7 +1168,7 @@ transform/pos = Vector2( 9.59842, 1.77422 )
 transform/rot = 58.5085
 transform/scale = Vector2( 1, 1 )
 texture = ExtResource( 12 )
-offset = Vector2( -9.60001, 1.43051e-006 )
+offset = Vector2( -9.60001, 1.43051e-06 )
 
 [node name="ear_l" type="Sprite" parent="skeleton_back"]
 
@@ -1214,7 +1204,7 @@ offset = Vector2( -9.60001, -19.2 )
 transform/pos = Vector2( 0, 1.6 )
 transform/rot = -1.03987
 texture = ExtResource( 17 )
-offset = Vector2( 1.19209e-007, -1.6 )
+offset = Vector2( 1.19209e-07, -1.6 )
 
 [node name="butt" type="Sprite" parent="skeleton_back"]
 

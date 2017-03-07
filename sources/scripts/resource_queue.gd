@@ -1,3 +1,5 @@
+signal loading_complete
+
 var thread
 var mutex
 var sem
@@ -128,6 +130,7 @@ func thread_process():
 			var path = res.get_meta("path")
 			if path in pending: # else it was already retrieved
 				pending[res.get_meta("path")] = res.get_resource()
+				emit_signal("loading_complete", res.get_meta("path"))
 
 			queue.erase(res) # something might have been put at the front of the queue while we polled, so use erase instead of remove
 

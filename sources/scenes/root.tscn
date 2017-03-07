@@ -7,7 +7,6 @@
 
 process/pause_mode = 2
 script/script = ExtResource( 1 )
-first_level = "res://sources/scenes/levels/tiled_level.tscn"
 
 [node name="level" type="Node" parent="."]
 
