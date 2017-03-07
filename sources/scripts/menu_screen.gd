@@ -24,7 +24,7 @@ func open():
 	open = true
 
 func close():
-	if enabled && open:
+	if open:
 		animation.play_backwards("open")
 		get_tree().set_pause(false)
 		menu_screen.stop()
@@ -38,6 +38,7 @@ func set_enabled(enabled):
 func _on_restart_button_pressed():
 	if open:
 		emit_signal("restart")
+		close()
 
 func _on_resume_button_pressed():
 	if open:
@@ -46,7 +47,9 @@ func _on_resume_button_pressed():
 func _on_menu_button_pressed():
 	if open:
 		emit_signal("menu")
+		close()
 
 func _on_next_button_pressed():
 	if open:
 		emit_signal("next")
+		close()

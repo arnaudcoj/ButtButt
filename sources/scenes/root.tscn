@@ -14,4 +14,8 @@ process/pause_mode = 1
 
 [node name="transition" parent="." instance=ExtResource( 2 )]
 
+[connection signal="closed" from="transition" to="." method="_on_transition_screen_closed"]
+
+[connection signal="opened" from="transition" to="." method="_on_transition_screen_opened"]
+
 

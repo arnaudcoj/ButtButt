@@ -5,7 +5,6 @@ onready var transition_screen = get_node("transition")
 
 func _ready():
 	levels_manager.select_level(0)
-	print(levels_manager.levels)
 	set_process_input(true)
 	set_process(true)
 	
@@ -15,27 +14,20 @@ func _input(event):
 		load_level()
 		
 func _process(delta):
-	print(levels_manager.level_index, " ", levels_manager.is_ready())
 	if level.get_child_count() == 0 && levels_manager.is_ready():
 		transition_screen.level_ready()
 
 func show_menu():
-	get_tree().set_pause(false)
 	transition_screen.reset()
-	for child in level.get_children():
-		child.queue_free()
 
 func change_level():
-	get_tree().set_pause(false)
+	transition_screen.reset()
 	levels_manager.select_level(0)
-	for child in level.get_children():
-		child.queue_free()
 	load_level()
 
 func load_level():
 	if levels_manager.is_ready():
 		var instance = levels_manager.get_level_instance()
-		print(instance)
 		instance.connect("menu", self, "_on_menu_requested")
 		instance.connect("restart", self, "_on_restart_requested")
 		instance.connect("next", self, "_on_next_requested")
@@ -45,5 +37,13 @@ func _on_menu_requested():
 	show_menu()
 	
 func _on_next_requested():
-	#levels_manager.select_next_level()
-	change_level()
+	levels_manager.select_next_level()
+	transition_screen.reset()
+	
+func _on_transition_screen_closed():
+	for child in level.get_children():
+		child.queue_free()
+	get_tree().set_pause(false)
+
+func _on_transition_screen_opened():
+	pass

@@ -21,21 +21,17 @@ func reset():
 	menu_screen.close()
 	
 	game_over_screen.close()
-	game_over_screen.set_enabled(false)
+	game_over_screen.set_enabled(true)
 	
 	success_screen.close()
-	success_screen.set_enabled(false)
+	success_screen.set_enabled(true)
 
 func _on_buttbutt_die():
 	menu_screen.set_enabled(false)
-	success_screen.set_enabled(false)
-	game_over_screen.set_enabled(true)
 	game_over_screen.open()
 
 func _on_buttbutt_exit():
 	menu_screen.set_enabled(false)
-	game_over_screen.set_enabled(false)
-	success_screen.set_enabled(true)
 	success_screen.open()
 
 func _on_menu_screen_pause():
@@ -43,10 +39,16 @@ func _on_menu_screen_pause():
 		buttbutt.release_controls()
 
 func _on_menu_screen_menu():
+	menu_screen.set_enabled(false)
+	success_screen.set_enabled(false)
+	game_over_screen.set_enabled(false)
 	emit_signal("menu")
 
 func _on_menu_screen_restart():
 	reset()
 
 func _on_menu_screen_next():
+	menu_screen.set_enabled(false)
+	success_screen.set_enabled(false)
+	game_over_screen.set_enabled(false)
 	emit_signal("next")
