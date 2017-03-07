@@ -1,23 +1,14 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://sources/scripts/control_changer.gd" type="Script" id=1]
 [ext_resource path="res://sources/assets/sprites/HUD/hud_gem_blue.png" type="Texture" id=2]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight23.png" type="Texture" id=3]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight25.png" type="Texture" id=4]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight24.png" type="Texture" id=5]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight39.png" type="Texture" id=6]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight22.png" type="Texture" id=7]
-[ext_resource path="res://sources/assets/sprites/controls/Sprites/transparentLight/transparentLight43.png" type="Texture" id=8]
-[ext_resource path="res://sources/assets/sprites/Items/gemBlue.png" type="Texture" id=9]
+[ext_resource path="res://sources/scenes/control_sprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sources/assets/sprites/Items/gemBlue.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 25.7161
-
-[sub_resource type="SpriteFrames" id=2]
-
-animations = [ { "frames":[ ExtResource( 3 ) ], "loop":false, "name":"move_right", "speed":1.0 }, { "frames":[ ExtResource( 4 ) ], "loop":false, "name":"move_down", "speed":1.0 }, { "frames":[ ExtResource( 5 ) ], "loop":false, "name":"move_up", "speed":1.0 }, { "frames":[ ExtResource( 6 ) ], "loop":false, "name":"run", "speed":1.0 }, { "frames":[ ExtResource( 7 ) ], "loop":false, "name":"move_left", "speed":1.0 }, { "frames":[ ExtResource( 8 ) ], "loop":false, "name":"jump", "speed":1.0 } ]
 
 [node name="control_changer" type="Area2D"]
 
@@ -75,19 +66,15 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="control_1_sprite" type="AnimatedSprite" parent="."]
+[node name="control_1_sprite" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 0, -31.1128 )
+transform/pos = Vector2( 0, -31.0857 )
 transform/scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 2 )
-animation = "run"
 
-[node name="control_2_sprite" type="AnimatedSprite" parent="."]
+[node name="control_2_sprite" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 0, 13.8675 )
+transform/pos = Vector2( 0, 13.7143 )
 transform/scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 2 )
-animation = "run"
 
 [node name="particles" type="Particles2D" parent="."]
 
@@ -98,7 +85,7 @@ config/preprocess = 0.1
 config/emit_timeout = 0.5
 config/emitting = false
 config/explosiveness = 0.03
-config/texture = ExtResource( 9 )
+config/texture = ExtResource( 4 )
 params/direction = 180.0
 params/spread = 70.99
 params/linear_velocity = 70.0

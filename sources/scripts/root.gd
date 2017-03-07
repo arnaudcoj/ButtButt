@@ -44,10 +44,14 @@ func load_level():
 		var instance = loaded_level.instance()
 		instance.connect("menu", self, "_on_menu_requested")
 		instance.connect("restart", self, "_on_restart_requested")
+		instance.connect("next", self, "_on_next_requested")
 		level.add_child(instance)
 	
 func _on_menu_requested():
 	show_menu()
 	
 func _on_restart_requested():
+	restart()
+	
+func _on_next_requested():
 	restart()

@@ -35,30 +35,48 @@ const CLIMBING = 5
 # current state
 var fsm = IDLE
 
+## ANIMATIONS
+const LEFT = 0
+const RIGHT = 1
+var direction = LEFT
+
 ## PHYSICS
 
 const GRAVITY = 1200
 const WALK_SPEED = 180
 const RUN_SPEED = 350
-const JUMP_SPEED = 80
+const JUMP_SPEED = 50
 const CLIMB_SPEED = Vector2(120, 200)
 
 var velocity = Vector2(0, 0)
 
-const MAX_JUMP_TIME = 0.11
+# Jump Duration
+const MAX_JUMP_TIME = 0.2
 var jumping_time = 0
+
+# Delay to jump after leaving the ground (feels better)
+const JUMP_DELAY = 0.3
+var time_off_ground = 0
 
 #### ONREADY ####
 
 onready var interaction_area = get_node("interaction_area")
 onready var climb_area = preload("res://sources/scripts/levels/climb_area.gd")
 onready var initial_pos = get_pos()
+onready var animations = get_node("animations")
+onready var animations_tree = get_node("animations_tree")
 
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 
+	var jump_animation_time = MAX_JUMP_TIME / animations.get_animation("jump").get_length()
+	animations_tree.timescale_node_set_scale("jump_speed", jump_animation_time)
+	animations_tree.set_active(true)
+	set_scale(Vector2(-abs(get_scale().x), get_scale().y))
+
 func reset():
+	set_scale(Vector2(-abs(get_scale().x), get_scale().y))
 	set_pos(initial_pos)
 	velocity = Vector2(0,0)
 	fsm = IDLE
@@ -68,6 +86,7 @@ func reset():
 func _fixed_process(delta):
 	decide_fsm(delta)
 	update_physics(delta)
+	update_animations(delta)
 
 func _input(event):
 	update_controls(event)
@@ -77,6 +96,8 @@ func _input(event):
 func update_physics(delta):
 	# first update the velocity with gravity
 	update_gravity(delta)
+	
+	update_jump_delay(delta)
 	
 	# next update the velocity according to the fsm state
 	if fsm == IDLE:
@@ -95,6 +116,11 @@ func update_physics(delta):
 	# finally integrate the velocity into actual motion
 	integrate_motion(delta)
 	
+func update_jump_delay(delta):
+	if fsm == FALLING || fsm == JUMPING:
+		time_off_ground += delta
+	elif time_off_ground > 0:
+		time_off_ground = 0
 	
 func update_idle(delta):
 	velocity.y = 0
@@ -162,10 +188,7 @@ func update_climbing(delta):
 	if available_action_pressed("move_right"):
 		direction.x += 1
 	
-	move_and_slide(direction * CLIMB_SPEED)
-		
-	velocity.y = 0
-	velocity.x = 0
+	velocity = direction * CLIMB_SPEED
 
 func update_gravity(delta):
 	#velocity.y += delta * GRAVITY
@@ -246,16 +269,20 @@ func decide_fsm_running(delta):
 func decide_fsm_jumping(delta):
 	if jumping_time > MAX_JUMP_TIME || !available_action_pressed("jump"):
 		change_state(FALLING)
-		reset_jump()
-		
+	
 func decide_fsm_falling(delta):
 	if is_on_ground():
 		if available_action_pressed("move_left") || available_action_pressed("move_right"):
 			change_state(WALKING)
+			reset_jump()
 		else :
 			change_state(IDLE)
+			reset_jump()
+	elif time_off_ground < JUMP_DELAY && jumping_time == 0 && available_action_pressed("jump"):
+		change_state(JUMPING)
 	elif can_climb() && !reached_top() && (available_action_pressed("move_up") || available_action_pressed("move_down")):
 		change_state(CLIMBING)
+		reset_jump()
 		
 func decide_fsm_climbing(delta):
 	if available_action_pressed("jump"):
@@ -267,7 +294,7 @@ func change_state(id):
 	if debug:
 		print(get_fsm_name(fsm), " -> ", get_fsm_name(id))
 	fsm = id
-
+	
 func can_climb():
 	for area in interaction_area.get_overlapping_areas():
 		if area extends climb_area:
@@ -296,6 +323,33 @@ func get_fsm_name(id = -1):
 	elif id == CLIMBING:
 		return "climbing"
 	
+# Animations
+
+func update_animations(delta):	
+	# compute speed ratio
+	var horizontal_speed = abs(velocity.x) / WALK_SPEED
+	var vertical_speed = abs(velocity.y) / JUMP_SPEED
+
+	# flip side
+	if fsm != CLIMBING:
+		if velocity.x < 0:
+			set_scale(Vector2(abs(get_scale().x), get_scale().y))
+		elif velocity.x > 0:
+			set_scale(Vector2(-abs(get_scale().x), get_scale().y))
+	
+	# set the animationTree values
+	animations_tree.timescale_node_set_scale("walk_speed", horizontal_speed * 1.2)
+	animations_tree.timescale_node_set_scale("run_speed", horizontal_speed * 1.2)
+	animations_tree.timescale_node_set_scale("falling_speed", vertical_speed)
+	animations_tree.timescale_node_set_scale("climbing_speed", max(horizontal_speed, vertical_speed))
+	
+	# special case when climbing
+	if fsm == CLIMBING:
+		animations_tree.transition_node_set_current("fsm_climb", 1)
+	else:
+		animations_tree.transition_node_set_current("fsm_climb", 0)
+		animations_tree.transition_node_set_current("fsm", fsm)
+
 # Interactions
 
 func update_controls(event):

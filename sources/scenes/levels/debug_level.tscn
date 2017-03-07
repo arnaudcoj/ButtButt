@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://sources/scripts/levels/level.gd" type="Script" id=1]
 [ext_resource path="res://sources/scenes/levels/climb_area.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://sources/scenes/controls_hud.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sources/scenes/menu_screen.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sources/scenes/levels/death_zone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sources/scenes/game_over.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sources/scenes/success.tscn" type="PackedScene" id=11]
+[ext_resource path="res://sources/scenes/exit.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -270,6 +273,15 @@ drag_margin/bottom = 0.2
 transform/pos = Vector2( 521, 691 )
 transform/scale = Vector2( 47.1875, 2.0625 )
 
+[node name="game_over_screen" parent="." instance=ExtResource( 10 )]
+
+[node name="success_screen" parent="." instance=ExtResource( 11 )]
+
+[node name="exit" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 407.525, 250.527 )
+transform/scale = Vector2( 1, 1 )
+
 [connection signal="controls_changed" from="buttbutt" to="controls_hud" method="_on_buttbutt_controls_changed"]
 
 [connection signal="die" from="buttbutt" to="." method="_on_buttbutt_die"]
@@ -281,5 +293,19 @@ transform/scale = Vector2( 47.1875, 2.0625 )
 [connection signal="pause" from="menu_screen" to="." method="_on_menu_screen_pause"]
 
 [connection signal="restart" from="menu_screen" to="." method="_on_menu_screen_restart"]
+
+[connection signal="menu" from="game_over_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="pause" from="game_over_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="game_over_screen" to="." method="_on_menu_screen_restart"]
+
+[connection signal="menu" from="success_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="next" from="success_screen" to="." method="_on_menu_screen_next"]
+
+[connection signal="pause" from="success_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="success_screen" to="." method="_on_menu_screen_restart"]
 
 
