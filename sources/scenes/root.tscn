@@ -1,18 +1,40 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://sources/scripts/root.gd" type="Script" id=1]
-[ext_resource path="res://sources/scenes/transition_screen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/UI/menus_manager.gd" type="Script" id=1]
+[ext_resource path="res://scenes/UI/main_menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/UI/level_selection_screen.tscn" type="PackedScene" id=3]
 
 [node name="root" type="Node"]
 
-process/pause_mode = 2
+[node name="canvas" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="menus_manager" type="Control" parent="canvas"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
 script/script = ExtResource( 1 )
-first_level = "res://sources/scenes/levels/tiled_level.tscn"
 
-[node name="level" type="Node" parent="."]
+[node name="main_menu" parent="canvas/menus_manager" instance=ExtResource( 2 )]
 
-process/pause_mode = 1
+[node name="level_selection_screen" parent="canvas/menus_manager" instance=ExtResource( 3 )]
 
-[node name="transition" parent="." instance=ExtResource( 2 )]
+[connection signal="level_selection_chosen" from="canvas/menus_manager/main_menu" to="canvas/menus_manager" method="_on_level_selection_chosen"]
+
+[connection signal="back" from="canvas/menus_manager/level_selection_screen" to="canvas/menus_manager" method="_on_level_selection_screen_back"]
+
+[connection signal="chosen_level" from="canvas/menus_manager/level_selection_screen" to="canvas/menus_manager" method="_on_level_selection_screen_chosen_level"]
 
 

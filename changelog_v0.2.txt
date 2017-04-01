@@ -1,0 +1,14 @@
+* change the icon
+* add success screen
+* add game over screen
+* replace hud control sprites for running and jumping actions (still not perfect, yet more intuitive)
+* add a delay to jump after quitting the ground
+* add touch-like controls for keyboards using page_up (left action) and page_down (right action) buttons
+* make climbing stop when top of a ladder is reached
+* add lateral direction control when jumping/falling
+* rewrite entirely the players controls, it all feels smoother now
+* add buttbutt assets and animations !!
+* fix : when more than one touch detected on the right part of the screen, both controls are activated
+* add a pause menu
+* fix a level design flaw (could jump over a control changer and then jump to the end of the level)
+* fix title not being reset when going back to title screen

@@ -1,0 +1,249 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://scripts/level/level.gd" type="Script" id=1]
+[ext_resource path="res://scenes/UI/controls_hud.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/cartwheel_120.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://scenes/level/tilesets/debug_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://scenes/level/control_changer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/entities/buttbutt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/level/death_zone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/level/climb_area.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/level/exit.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/UI/menu_screen.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/UI/game_over.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/UI/success.tscn" type="PackedScene" id=12]
+
+[node name="tiled_level" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="controls_hud" parent="." instance=ExtResource( 2 )]
+
+[node name="title" type="Label" parent="controls_hud"]
+
+visibility/visible = false
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 512.0
+margin/top = 300.0
+margin/right = -512.0
+margin/bottom = 0.0
+custom_fonts/font = ExtResource( 3 )
+text = "ButtButt"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="tilemaps" type="Node" parent="."]
+
+[node name="back_objects" type="TileMap" parent="tilemaps"]
+
+mode = 0
+tile_set = ExtResource( 4 )
+cell/size = Vector2( 70, 70 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 0
+collision/mask = 0
+occluder/light_mask = 1
+tile_data = IntArray( 131090, 98, 196626, 98, 262162, 98, 327698, 98, 393234, 98, 458770, 98 )
+
+[node name="control_changers" type="Node" parent="tilemaps/back_objects"]
+
+[node name="control_changer" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 175, 525 )
+
+[node name="control_changer1" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 595, 455 )
+control_1 = "jump"
+
+[node name="control_changer2" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 875, 455 )
+control_1 = "run"
+
+[node name="control_changer3" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 1715, 735 )
+control_2 = "move_up"
+
+[node name="control_changer4" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 875, 315 )
+control_1 = "move_up"
+
+[node name="control_changer5" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 1225, 105 )
+control_2 = "jump"
+
+[node name="control_changer6" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 1225, 245 )
+control_2 = "run"
+
+[node name="control_changer7" parent="tilemaps/back_objects/control_changers" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 735, 105 )
+control_1 = "jump"
+
+[node name="objects" type="TileMap" parent="tilemaps"]
+
+mode = 0
+tile_set = ExtResource( 4 )
+cell/size = Vector2( 70, 70 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -7, 103, -6, 103, -5, 103, -4, 103, -3, 103, -2, 103, -1, 103, -65536, 103, 65529, 150, 65530, 150, 65531, 150, 65532, 150, 65533, 150, 65534, 150, 65535, 150, 0, 150, 18, 33, 131065, 150, 131066, 150, 131067, 150, 131068, 150, 131069, 150, 131070, 150, 131071, 150, 65536, 150, 65545, 33, 65549, 19, 65554, 67, 196601, 150, 196602, 150, 196603, 150, 196604, 150, 196605, 150, 196606, 150, 196607, 150, 131072, 150, 131081, 68, 131082, 56, 131083, 56, 131084, 56, 131085, 31, 131086, 56, 131087, 56, 131088, 56, 131089, 56, 131090, 56, 262137, 150, 262138, 150, 262139, 150, 262140, 150, 262141, 150, 262142, 150, 262143, 150, 196608, 150, 196621, 31, 196626, 19, 327673, 150, 327674, 150, 327675, 150, 327676, 150, 327677, 150, 327678, 150, 327679, 150, 262144, 150, 262155, 33, 262157, 31, 262159, 68, 262160, 56, 262161, 56, 262162, 31, 393209, 150, 393210, 150, 393211, 150, 393212, 150, 393213, 150, 393214, 150, 393215, 150, 327680, 150, 327691, 56, 327692, 56, 327693, 44, 327698, 31, 458745, 150, 458746, 150, 458747, 150, 458748, 150, 458749, 150, 458750, 150, 458751, 150, 393216, 150, 393225, 33, 393234, 31, 393236, 19, 524281, 150, 524282, 150, 524283, 150, 524284, 150, 524285, 150, 524286, 150, 524287, 150, 458752, 150, 458759, 32, 458760, 103, 458761, 103, 458762, 103, 458763, 103, 458764, 103, 458765, 103, 458766, 103, 458767, 103, 458769, 103, 458770, 103, 458771, 103, 458772, 31, 458774, 128, 458775, 103, 458776, 103, 458777, 103, 458778, 103, 458779, 103, 458780, 103, 458781, 103, 458782, 103, 458783, 103, 458784, 103, 589817, 150, 589818, 150, 589819, 150, 589820, 150, 589821, 150, 589822, 150, 589823, 150, 524288, 150, 524289, 103, 524290, 103, 524291, 103, 524292, 103, 524293, 103, 524294, 103, 524295, 20, 524296, 102, 524297, 102, 524298, 102, 524299, 150, 524300, 150, 524301, 150, 524302, 150, 524303, 150, 524305, 150, 524306, 150, 524307, 150, 524308, 31, 524309, 19, 524313, 150, 524314, 150, 524315, 150, 524316, 150, 524317, 150, 524318, 150, 524319, 150, 524320, 150, 655353, 150, 655354, 150, 655355, 150, 655356, 150, 655357, 150, 655358, 150, 655359, 150, 589824, 150, 589825, 150, 589826, 150, 589827, 150, 589828, 150, 589829, 150, 589830, 150, 589831, 150, 589832, 43, 589833, 43, 589834, 43, 589835, 150, 589836, 150, 589837, 150, 589838, 150, 589839, 150, 589841, 150, 589842, 150, 589843, 150, 589844, 103, 589845, 31, 589846, 19, 589849, 150, 589850, 150, 589851, 150, 589852, 150, 589853, 150, 589854, 150, 589855, 150, 589856, 150, 720889, 150, 720890, 150, 720891, 150, 720892, 150, 720893, 150, 720894, 150, 720895, 150, 655360, 150, 655361, 150, 655362, 150, 655363, 150, 655364, 150, 655365, 150, 655366, 150, 655367, 150, 655368, 43, 655369, 43, 655370, 43, 655371, 150, 655372, 150, 655373, 150, 655374, 150, 655375, 150, 655377, 150, 655378, 150, 655379, 150, 655380, 150, 655381, 103, 655382, 31, 655385, 150, 655386, 150, 655387, 150, 655388, 150, 655389, 150, 655390, 150, 655391, 150, 655392, 150, 786425, 98, 786426, 98, 786427, 98, 786428, 98, 786429, 98, 786430, 98, 786431, 98, 720896, 98, 720897, 98, 720898, 98, 720899, 98, 720900, 98, 720901, 98, 720902, 98, 720903, 98, 720904, 98, 720905, 98, 720906, 98, 720907, 98, 720908, 98, 720909, 98, 720910, 98, 720914, 98, 720915, 98, 720916, 98, 720917, 98, 720918, 73, 720919, 73, 720920, 73, 720921, 98, 720922, 98, 720923, 98, 720924, 98, 720925, 98, 720926, 98, 720927, 98, 720928, 98, 851961, 98, 851962, 98, 851963, 98, 851964, 98, 851965, 98, 851966, 98, 851967, 98, 786432, 98, 786433, 98, 786434, 98, 786435, 98, 786436, 98, 786437, 98, 786438, 98, 786439, 98, 786440, 98, 786441, 98, 786442, 98, 786443, 98, 786444, 98, 786445, 98, 786446, 98, 786447, 98, 786448, 98, 786449, 98, 786450, 98, 786451, 98, 786452, 98, 786453, 98, 786454, 98, 786455, 98, 786456, 98, 786457, 98, 786458, 98, 786459, 98, 786460, 98, 786461, 98, 786462, 98, 786463, 98, 786464, 98, 917497, 98, 917498, 98, 917499, 98, 917500, 98, 917501, 98, 917502, 98, 917503, 98, 851968, 98, 851969, 98, 851970, 98, 851971, 98, 851972, 98, 851973, 98, 851974, 98, 851975, 98, 851976, 98, 851977, 98, 851978, 98, 851979, 98, 851980, 98, 851981, 98, 851982, 98, 851983, 98, 851984, 98, 851985, 98, 851986, 98, 851987, 98, 851988, 98, 851989, 98, 851990, 98, 851991, 98, 851992, 98, 851993, 98, 851994, 98, 851995, 98, 851996, 98, 851997, 98, 851998, 98, 851999, 98, 852000, 98, 983033, 98, 983034, 98, 983035, 98, 983036, 98, 983037, 98, 983038, 98, 983039, 98, 917504, 98, 917505, 98, 917506, 98, 917507, 98, 917508, 98, 917509, 98, 917510, 98, 917511, 98, 917512, 98, 917513, 98, 917514, 98, 917515, 98, 917516, 98, 917517, 98, 917518, 98, 917519, 98, 917520, 98, 917521, 98, 917522, 98, 917523, 98, 917524, 98, 917525, 98, 917526, 98, 917527, 98, 917528, 98, 917529, 98, 917530, 98, 917531, 98, 917532, 98, 917533, 98, 917534, 98, 917535, 98, 917536, 98 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="buttbutt" parent="tilemaps/objects" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 176, 510 )
+
+[node name="Camera2D" type="Camera2D" parent="tilemaps/objects/buttbutt"]
+
+transform/pos = Vector2( -1, 0 )
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/smoothed = false
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+
+[node name="front_objects" type="TileMap" parent="tilemaps"]
+
+mode = 0
+tile_set = ExtResource( 4 )
+cell/size = Vector2( 70, 70 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 393241, 64, 458755, 40, 524303, 150, 524304, 102, 524305, 150, 589839, 150, 589840, 43, 589841, 150, 655375, 150, 655376, 43, 655377, 150, 720911, 98, 720912, 98, 720913, 98, 720914, 98 )
+
+[node name="death_zones" type="Node" parent="."]
+
+[node name="death_zone" parent="death_zones" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 778, 983.929 )
+transform/scale = Vector2( 85.0625, 4.49778 )
+
+[node name="death_zone1" parent="death_zones" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 1155, 700 )
+transform/scale = Vector2( 1.09375, 2.1875 )
+
+[node name="climb_areas" type="Node" parent="."]
+
+[node name="climb_area" parent="climb_areas" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 945, 222 )
+transform/scale = Vector2( 1.09375, 4 )
+
+[node name="climb_area1" parent="climb_areas" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1295, 356.5 )
+transform/scale = Vector2( 1.09375, 4.17188 )
+
+[node name="climb_area2" parent="climb_areas" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1435, 537 )
+transform/scale = Vector2( 1.09375, 2.90625 )
+
+[node name="climb_area3" parent="climb_areas" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1505, 630 )
+transform/scale = Vector2( 1.09375, 2.1875 )
+
+[node name="climb_area4" parent="climb_areas" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1575, 700 )
+transform/scale = Vector2( 1.09375, 2.1875 )
+
+[node name="exit_areas" type="Node" parent="."]
+
+[node name="exit" parent="exit_areas" instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 1992, 452 )
+
+[node name="menu_screen" parent="." instance=ExtResource( 10 )]
+
+[node name="game_over_screen" parent="." instance=ExtResource( 11 )]
+
+[node name="success_screen" parent="." instance=ExtResource( 12 )]
+
+[connection signal="controls_changed" from="tilemaps/objects/buttbutt" to="controls_hud" method="_on_buttbutt_controls_changed"]
+
+[connection signal="die" from="tilemaps/objects/buttbutt" to="." method="_on_buttbutt_die"]
+
+[connection signal="exit" from="tilemaps/objects/buttbutt" to="." method="_on_buttbutt_exit"]
+
+[connection signal="menu" from="menu_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="next" from="menu_screen" to="." method="_on_menu_screen_next"]
+
+[connection signal="pause" from="menu_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="menu_screen" to="." method="_on_menu_screen_restart"]
+
+[connection signal="menu" from="game_over_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="next" from="game_over_screen" to="." method="_on_menu_screen_next"]
+
+[connection signal="pause" from="game_over_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="game_over_screen" to="." method="_on_menu_screen_restart"]
+
+[connection signal="menu" from="success_screen" to="." method="_on_menu_screen_menu"]
+
+[connection signal="next" from="success_screen" to="." method="_on_menu_screen_next"]
+
+[connection signal="pause" from="success_screen" to="." method="_on_menu_screen_pause"]
+
+[connection signal="restart" from="success_screen" to="." method="_on_menu_screen_restart"]
+
+

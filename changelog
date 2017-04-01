@@ -1,0 +1,420 @@
+commit cafa90684a83851119f4b2fd1c811a38d2defa68
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Mar 4 00:31:07 2017 +0100
+
+    add previews and title image for itchio
+
+commit f5417b9fec60cb988dcb6859e46298b1c76a6810
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Mar 3 23:53:22 2017 +0100
+
+    change the icon
+
+commit 21851076216cd1cdad1788ecee717a3ce5548dea
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Mar 3 23:26:29 2017 +0100
+
+    add success screen. Let's call it v0.2 =D
+
+commit b19eda343c1e698345a58eea2cab7a8a9c41e678
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Mar 3 22:50:54 2017 +0100
+
+    add game over menu
+
+commit b4625ae0e4ee8748a7c145f7a78dee8b749fcf07
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Mar 3 17:46:21 2017 +0100
+
+    replace hud controls for running and jumping actions
+
+commit 021cb5f6ca36ef391a892c30ae9701e108f2ccaa
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Mar 3 17:17:37 2017 +0100
+
+    make a bigger touch area for the menu button (a bit hacky, uses a sprite as a child of the button, but works)
+
+commit 41cd1eb4f6d442b4cfea6ce1ffa903642ea991cf
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Thu Mar 2 22:09:29 2017 +0100
+
+    fix jump animation
+
+commit dbd0a040f567afd62ef0e3c99859aee21e0b60e7
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Thu Mar 2 21:04:48 2017 +0100
+
+    add a delay to jump after quitting the ground
+
+commit 5ef236cc9a42612b6a151ace86b3a33bc3006514
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Thu Mar 2 14:14:35 2017 +0100
+
+    integrate animations in the game
+
+commit 81a4468c33c43217a5f614b0073475899eb944da
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Thu Mar 2 00:22:15 2017 +0100
+
+    add twerk animation
+
+commit 257b59a6a8e2c588f8cb5f9425e30e9bd7b07b82
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Thu Mar 2 00:21:10 2017 +0100
+
+    add climbing animation
+
+commit d3e3812f1eeae30414f46ddd20f673a95c44c5a2
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Mar 1 23:26:55 2017 +0100
+
+    add buttbutt back sprite
+
+commit 4db058e4290a7cac9545f290afc682b29493e3f0
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 28 23:12:40 2017 +0100
+
+    add animations previews
+
+commit bc3e4c0a693c0e360ee6ca7765255a80656247f3
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 28 23:12:16 2017 +0100
+
+    enhance idle and walking animations, create jumping and falling animations
+
+commit 263dc1ffdbcddda7a8cebd12fe4db7b23704ddf5
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 28 22:14:47 2017 +0100
+
+    create idle and walking animations
+
+commit f3c7ccc400af697aa21376243c54a0ca17f94ab9
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 28 21:42:03 2017 +0100
+
+    create base animation
+
+commit fa001d242e7bb33ef1902a188324699a33afeb18
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 21 19:41:47 2017 +0100
+
+    tweak buttbutt speeds
+
+commit 1ef00edeb7a3c2e347739b0e57783014b42d8c07
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 21 19:33:23 2017 +0100
+
+    fix buttbutt's offset when reloading by resetting buttbutt instead of reloading the scene
+
+commit 6323718c6bfa754e0ad0fe91d9c5011772446cef
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 21 14:27:33 2017 +0100
+
+    move down a bit buttbutt's interaction area
+
+commit dffa2cf48a4093dbc5da2c5772cf724a28ab68ba
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 21 14:21:50 2017 +0100
+
+    buttbutt integration finished
+
+commit 23fe7a0b39367a9b31ccbb94f384c7b014fc41a3
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 21 12:16:57 2017 +0100
+
+    add temporary 2 keyboard buttons controls using page_up and page_down buttons
+
+commit 130bc96334d92714eceb75e5f71abe992f9793f5
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 21 12:11:44 2017 +0100
+
+    fix [free: Condition ' !self.is_valid() ' is true.] error in climb_area by replacing top's lineshape collision by a segment collision
+
+commit 6b87bac7b4988dbaaa3ca7ba24433826d0f22d58
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 21 00:02:38 2017 +0100
+
+    integrate buttbutt into the actual game
+
+commit 1613365f8a88fc95a59f3ecbaa9364dc2ca304f9
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Mon Feb 20 22:51:08 2017 +0100
+
+    add touchscreen controls
+
+commit 66c4f36809898f4acfdc6743e82fe8c9282d7cef
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Mon Feb 20 21:22:41 2017 +0100
+
+    make climbing stop when top of a ladder is reached
+
+commit f186733c91f26077bea5363a812be4ebfc0d2229
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Mon Feb 20 19:32:50 2017 +0100
+
+    make climbing stop when top of a ladder is reached
+
+commit a8cb1da81eb30c392bd82b8ce5dd5a864fe87b2c
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sun Feb 19 22:55:37 2017 +0100
+
+    enhance climbing, needs to block when getting to the top of the ladder
+
+commit 5ab8d9ccad46b222d83a428d69d6b014d60cd78e
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sun Feb 19 19:04:56 2017 +0100
+
+    enhances walking on slopes, move project to godot 2.2 in order to use move_and_slide.
+
+commit 85f016e7eb1d2075f2c70fb351ea870248cd6427
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Feb 17 13:23:43 2017 +0100
+
+    add climbing (needs some improvements)
+
+commit ff657c5eb3d3679978e2b132af224561225d2bea
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Feb 17 02:19:04 2017 +0100
+
+    add running to fsm
+
+commit bf333967480115714376f30799c6f687730e7aa1
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Thu Feb 16 12:38:47 2017 +0100
+
+    add lateral direction control when jumping/falling
+
+commit 2dd1f9eb1313fd2eb095ec2caaa72443b16284b9
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 15 03:06:20 2017 +0100
+
+    ading buttbutt assets, rewriting player controls and physics (BREAKS THE GAME)
+
+commit 7e19714e927584b8f583d5e6fccee075f0bf9d69
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sun Feb 12 12:06:13 2017 +0100
+
+    fix : character sprite flips slide while falling and moving in an opposite direction
+
+commit 4820903ada6b97ceebb8a1f32b8e8159684e5f83
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sun Feb 12 12:04:51 2017 +0100
+
+    fix : resume button grabs focus when menu opened with keyboard but not with clicking/touching
+
+commit 7efd20476902e9d7b847afac63e25798e6c7840a
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 7 00:36:01 2017 +0100
+
+    fix : reset title rotation when going back to the home screen
+
+commit a44a38c64008cad635512bc95ecae05bd601e62e
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 7 00:30:00 2017 +0100
+
+    fix : after finishing the level was restarting. Now shows the home menu
+
+commit eab6f40b64e36a9e7ae08dc00cca28bacaea9dd4
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 7 00:28:33 2017 +0100
+
+    fix bug : when more than one touch detected on the right part of the screen, both controls are activated
+
+commit 80de8744440fd4bf0747a1da0c839a33d730a152
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Feb 7 00:20:06 2017 +0100
+
+    add a better menu with classic buttons and signal handling
+
+commit d198a2c544a04aea3215a39dee1137ee7d1db0d7
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Feb 4 16:14:20 2017 +0100
+
+    add menu preview
+
+commit 524f8d6e42c9a044d2e8338f517355d1e11a16f0
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Feb 4 16:08:50 2017 +0100
+
+    add title animation in pause menu
+
+commit c4d256e1c991995ce7ba0cd02f45165a51b9b1fa
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Feb 4 15:52:49 2017 +0100
+
+    add a first implementation of a menu. Needs more polishing but it's working
+
+commit 4bfd7634c3bce476b4108400c376598314df996c
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Feb 4 11:12:56 2017 +0100
+
+    add enumerate export strings for control changers
+
+commit d56809fea509b471ae21523c7caf09df23c42986
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Feb 4 10:47:11 2017 +0100
+
+    fix a level design flaw (could jump over a control changer and then jump to the end of the level)
+
+commit ac33ecbeb037e84c85be49dbf452611854eca905
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Feb 4 10:22:52 2017 +0100
+
+    fix title not being reset when going back to title screen
+
+commit 4992ea709fb18d25c8a47afd66f70a8e45443ab2
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 1 21:05:16 2017 +0100
+
+    make control changers back objects again
+
+commit 4d4dc2cf9b147cd2c1fa2435e3860bb5c83ccc6b
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 1 21:01:57 2017 +0100
+
+    make sign front objects again
+
+commit 6e2f2324eb15b29a88930a4f7be759c6547eb55d
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 1 20:56:35 2017 +0100
+
+    fix anti hopping not working when walking
+
+commit f94f98f4694ac2b6c54799e31d7a127481cd0d34
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 1 20:31:15 2017 +0100
+
+    reduce loading time by reducing the tileset
+
+commit 53886414e608a15917c7e73abcf9c9e605eb0313
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 1 20:30:48 2017 +0100
+
+    make bunny hopping impossible
+
+commit f93f6eddddcb875205ae5c8e9e2d31b892f1e3cc
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 1 01:01:59 2017 +0100
+
+    update readme
+
+commit 3366db14a758159ee46a7e61d5ae34fbcfe129a0
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Feb 1 00:55:36 2017 +0100
+
+    works on android, add some previews
+
+commit f8aa6353366c9848404d573f1a105df86f570402
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Jan 31 23:36:53 2017 +0100
+
+    add touch controls (could be unstable with exotic resolutions)
+
+commit 3d47f132cf8ff72fe5238e68384c716510bec8ff
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Jan 31 21:57:53 2017 +0100
+
+    add title screen and background loading
+
+commit ac791c982f04030599576837da1892ac5082efe7
+Author: arnaudcoj <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Jan 31 14:56:20 2017 +0100
+
+    make tiled_level a bit harder
+
+commit 87b661a55f5d0d812ec99f711d3b9a70901ecaab
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Jan 31 00:41:53 2017 +0100
+
+    change control hud to react only when the control is different
+
+commit 2ecf49b2051d7b15e8eb4be51905fd89a1248e83
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Jan 31 00:35:25 2017 +0100
+
+    add particles to control hud
+
+commit 275f022f034fc945bea9bec88b7fd737fb0de16e
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Jan 31 00:27:16 2017 +0100
+
+    add control hud
+
+commit 68e1574b600102ef86b0c0f70a82b130ec6baa40
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Mon Jan 30 23:40:45 2017 +0100
+
+    add control_changers
+
+commit 74b6b600ed12358cdea8b72b0787d4bc39dcce7c
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Jan 28 00:57:21 2017 +0100
+
+    add delay for falling and jumping behaviours
+
+commit 36ecf9dbcbb16a0a2347592f906e3a54704cf09b
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Sat Jan 28 00:41:40 2017 +0100
+
+    refactor player_control
+
+commit 93b3f29ceba54130cbb59dac75b570eaec0b30fa
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Jan 27 20:57:34 2017 +0100
+
+    add air friction
+
+commit 45ad2db052cb4ffdb32fa92359daaeaa6a62b416
+Author: arnaudcoj <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Thu Jan 26 10:03:57 2017 +0100
+
+    add direction changing while jumping
+
+commit 6d01d00b6e7810ebbdf41735a85a98179bf9c2b2
+Author: ArnaudCoj <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Wed Jan 11 19:35:06 2017 +0100
+
+    Create README.md
+
+commit 0ff9a364d759c96d5fa6109205c6cfaff9f6f590
+Author: Non0w <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Fri Dec 23 23:52:35 2016 +0100
+
+    add ladder and running previews
+
+commit dc8aa8bbaf90e795aab40227b60ef5a64e7a157f
+Author: arnaudcoj <arnaud.cojez@univ-lille1.fr>
+Date:   Thu Dec 22 20:07:13 2016 +0100
+
+    add death areas and climbing areas
+
+commit 96a60b6855bd5b0eb9b9c13acc8ca543c094fbb8
+Author: arnaudcoj <arnaud.cojez@univ-lille1.fr>
+Date:   Tue Dec 20 11:25:46 2016 +0100
+
+    remove addon folder
+
+commit da0e50e6c4c5f8072830c0169986466b0ca03546
+Author: arnaudcoj <arnaud.cojez@univ-lille1.fr>
+Date:   Tue Dec 20 11:22:16 2016 +0100
+
+    remove unused sprites
+
+commit 04b167ca7fe2b063b453dc420f2797f1f236cbd4
+Merge: 76c8218 1ff8ef8
+Author: arnaudcoj <arnaud.cojez@univ-lille1.fr>
+Date:   Tue Dec 20 11:19:28 2016 +0100
+
+    Merge branch 'master' of https://github.com/arnaudcoj/godot_game_jam_2016
+
+commit 1ff8ef82bc890a51d54c5dace807116daa242451
+Author: ArnaudCoj <arnaud.cojez@etudiant.univ-lille1.fr>
+Date:   Tue Dec 20 11:17:54 2016 +0100
+
+    Initial commit
+
+commit 76c8218821b1bfddd81f7ac869d06bebf3301822
+Author: arnaudcoj <arnaud.cojez@univ-lille1.fr>
+Date:   Tue Dec 20 11:17:16 2016 +0100
+
+    init
